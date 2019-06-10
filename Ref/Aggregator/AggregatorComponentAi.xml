@@ -1,0 +1,49 @@
+<component name="Aggregator" kind="active" namespace="Ref">
+    <import_port_type>Ref/CislunarPorts/RTCPortAi.xml</import_port_type>
+    <comment>Component that talks to RTC from RPI</comment>
+    <ports>
+        <port name="TimePortAg" data_type="Ref::RTCPort" kind="output"></port>
+    </ports>
+    <commands>
+        <command kind="async" opcode="0" mnemonic="GET_RTC_DATA">
+            	<comment>
+            	get time
+            	</comment>
+        </command>
+	<command kind="async" opcode="1" mnemonic="SET_RTC_DATA">
+		<comment> 
+		set time
+		</comment>
+		<args>
+			<arg name="time" type="U32"></arg>
+		</args>
+	</command>
+    </commands>
+    <telemetry>
+        <channel id="0" name="RTC_TIME" data_type="U32">
+            <comment>
+            The time
+            </comment>
+        </channel>
+    </telemetry>
+    <events>
+        <event id="0" name="RTC_COMMAND_SENT" severity="ACTIVITY_HI" format_string="RTC CMD SENT: %u %d"  >
+            <comment>
+            Math command sent
+            </comment>
+            <args>
+                <arg name="timeEv" type="U32">
+                    <comment>The val1 argument</comment>
+                </arg>                
+                <arg name="opEv" type="ENUM">
+                    <comment>The requested operation</comment>
+	                <enum name="MathOpEv">
+	                    <item name="SET_EV"/>
+	                    <item name="GET_EV"/>          
+	                </enum>
+                </arg>          
+            </args>
+        </event>
+    </events>
+</component>
+
