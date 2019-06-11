@@ -29,6 +29,9 @@
 	<import_component_type>Drv/BlockDriver/BlockDriverComponentAi.xml</import_component_type>
 	<import_component_type>Svc/FileDownlink/FileDownlinkComponentAi.xml</import_component_type>
 	<import_component_type>Svc/PassiveTextLogger/PassiveTextLoggerComponentAi.xml</import_component_type>
+<import_component_type>Ref/Aggregator/AggregatorComponentAi.xml</import_component_type>
+<import_component_type>Ref/RTC/RTCComponentAi.xml</import_component_type>
+
 
    <instance namespace="Svc" name="fatalHandler" type="FatalHandler" base_id="1"  base_id_window="20" />
 
@@ -85,6 +88,9 @@
    <instance namespace="Svc" name="fileDownlink" type="FileDownlink" base_id="501"  base_id_window="20" />
 
    <instance namespace="Svc" name="textLogger" type="PassiveTextLogger" base_id="521"  base_id_window="20" />
+
+   <instance namespace="Ref" name="aggregator" type="Aggregator" base_id="1000" base_id_window="100"/>
+   <instance namespace="Ref" name="rtc" type="RTC" base_id="1100" base_id_window="100"/>
 
 
 <connection name = "Connection1">
@@ -807,4 +813,87 @@
 	 <source component = "cmdSeq" port = "cmdRegOut" type = "CmdReg" num = "0"/>
  	 <target component = "cmdDisp" port = "compCmdReg" type = "CmdReg" num = "13"/>
 </connection>
+
+<!-- Command Regsitration Ports - registration port number must match dispatch port for each component -->
+
+<connection name = "AggregatorReg">
+	 <source component = "aggregator" port = "CmdReg" type = "CmdReg" num = "0"/>
+ 	 <target component = "cmdDisp" port = "compCmdReg" type = "CmdReg" num = "100"/>
+</connection>
+<connection name = "RTCReg">
+	 <source component = "rtc" port = "CmdReg" type = "CmdReg" num = "0"/>
+ 	 <target component = "cmdDisp" port = "compCmdReg" type = "CmdReg" num = "101"/>
+</connection>
+
+<!-- Command Dispatch Ports - dispatch port number must match registration port number for each component -->
+
+<connection name = "AggregatorDisp">
+	 <source component = "cmdDisp" port = "compCmdSend" type = "Cmd" num = "100"/>
+ 	 <target component = "aggregator" port = "CmdDisp" type = "Cmd" num = "0"/>
+</connection>
+<connection name = "RTCDisp">
+	 <source component = "cmdDisp" port = "compCmdSend" type = "Cmd" num = "101"/>
+ 	 <target component = "rtc" port = "CmdDisp" type = "Cmd" num = "0"/>
+</connection>
+
+<!-- Command Reply Ports - go to the same response port on the dispathcer -->
+
+<connection name = "AggregatorReply">
+	 <source component = "aggregator" port = "CmdStatus" type = "CmdResponse" num = "0"/>
+ 	 <target component = "cmdDisp" port = "compCmdStat" type = "CmdResponse" num = "0"/>
+</connection>
+<connection name = "RTCReply">
+	 <source component = "rtc" port = "CmdStatus" type = "CmdResponse" num = "0"/>
+ 	 <target component = "cmdDisp" port = "compCmdStat" type = "CmdResponse" num = "0"/>
+</connection>
+
+<!-- Event log binary connections -->
+
+<connection name = "AggregatorLog">
+	 <source component = "aggregator" port = "Log" type = "Log" num = "0"/>
+ 	 <target component = "eventLogger" port = "LogRecv" type = "Log" num = "0"/>
+</connection>
+<connection name = "RTCLog">
+	 <source component = "rtc" port = "Log" type = "Log" num = "0"/>
+ 	 <target component = "eventLogger" port = "LogRecv" type = "Log" num = "0"/>
+</connection>
+
+<!-- Event logger text connections -->
+
+<connection name = "AggregatorTextLog">
+	 <source component = "aggregator" port = "LogText" type = "LogText" num = "0"/>
+ 	 <target component = "textLogger" port = "TextLogger" type = "LogText" num = "0"/>
+</connection>
+<connection name = "RTCTextLog">
+	 <source component = "rtc" port = "LogText" type = "LogText" num = "0"/>
+ 	 <target component = "textLogger" port = "TextLogger" type = "LogText" num = "0"/>
+</connection>
+
+<!-- Telemetry Connections -->
+
+<connection name = "AggregatorTextTlm">
+	 <source component = "aggregator" port = "Tlm" type = "Tlm" num = "0"/>
+ 	 <target component = "chanTlm" port = "TlmRecv" type = "Tlm" num = "0"/>
+</connection>
+<connection name = "RTCTextTlm">
+	 <source component = "rtc" port = "Tlm" type = "Tlm" num = "0"/>
+ 	 <target component = "chanTlm" port = "TlmRecv" type = "Tlm" num = "0"/>
+</connection>
+
+<!-- Parameter Connections -->
+
+<!-- Scheduler Connections -->
+
+<!-- RTC Connection -->
+<connection name = "RTCWriteConnection">
+	 <source component = "aggregator" port = "RTCWrite" type = "Ref::RTCWritePort" num = "0"/>
+ 	 <target component = "rtc" port = "WritePort" type = "Ref::RTCWritePort" num = "0"/>
+</connection>
+<connection name = "RTCReadConnection">
+	 <source component = "aggregator" port = "RTCRead" type = "Ref::RTCReadPort" num = "0"/>
+ 	 <target component = "rtc" port = "ReadPort" type = "Ref::RTCReadPort" num = "0"/>
+</connection>
+
+
+
 </assembly>
