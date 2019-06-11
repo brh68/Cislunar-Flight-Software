@@ -1,1 +1,1 @@
-SRC = RTCPortAi.xml
+SRC = RTCWritePortAi.xml  RTCReadPortAi.xml

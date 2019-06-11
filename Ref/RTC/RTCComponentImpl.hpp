@@ -53,12 +53,17 @@ namespace Ref {
       // Handler implementations for user-defined typed input ports
       // ----------------------------------------------------------------------
 
-      //! Handler implementation for TimePort
+      //! Handler implementation for WritePort
       //!
-      void TimePort_handler(
+      void WritePort_handler(
           const NATIVE_INT_TYPE portNum, /*!< The port number*/
-          U32 time, 
-          RTCOp operation 
+          U32 time 
+      );
+
+      //! Handler implementation for ReadPort
+      //!
+      U32 ReadPort_handler(
+          const NATIVE_INT_TYPE portNum /*!< The port number*/
       );
 
     PRIVATE:
@@ -67,9 +72,9 @@ namespace Ref {
       // Command handler implementations
       // ----------------------------------------------------------------------
 
-      //! Implementation for RTC_COMMAND command handler
+      //! Implementation for RTC_CMD_TIME command handler
       //! set time
-      void RTC_COMMAND_cmdHandler(
+      void RTC_CMD_TIME_cmdHandler(
           const FwOpcodeType opCode, /*!< The opcode*/
           const U32 cmdSeq, /*!< The command sequence number*/
           U32 time /*!< The first value*/

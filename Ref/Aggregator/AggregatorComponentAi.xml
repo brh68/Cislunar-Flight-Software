@@ -1,8 +1,10 @@
 <component name="Aggregator" kind="active" namespace="Ref">
-    <import_port_type>Ref/CislunarPorts/RTCPortAi.xml</import_port_type>
+    <import_port_type>Ref/CislunarPorts/RTCWritePortAi.xml</import_port_type>
+    <import_port_type>Ref/CislunarPorts/RTCReadPortAi.xml</import_port_type>
     <comment>Component that talks to RTC from RPI</comment>
     <ports>
-        <port name="TimePortAg" data_type="Ref::RTCPort" kind="output"></port>
+        <port name="RTCWrite" data_type="Ref::RTCWritePort" kind="output"></port>
+	<port name="RTCRead" data_type="Ref::RTCReadPort" kind="output"></port>
     </ports>
     <commands>
         <command kind="async" opcode="0" mnemonic="GET_RTC_DATA">
@@ -20,7 +22,7 @@
 	</command>
     </commands>
     <telemetry>
-        <channel id="0" name="RTC_TIME" data_type="U32">
+        <channel id="0" name="AGG_TIME" data_type="U32">
             <comment>
             The time
             </comment>

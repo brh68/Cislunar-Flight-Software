@@ -58,7 +58,9 @@ namespace Ref {
         const U32 cmdSeq
     )
   {
-    // TODO
+    uint32_t time = this->RTCRead_out(0);
+    this->tlmWrite_AGG_TIME(time);
+    this->log_ACTIVITY_HI_RTC_COMMAND_SENT(time, GET_EV);
     this->cmdResponse_out(opCode,cmdSeq,Fw::COMMAND_OK);
   }
 
@@ -69,7 +71,9 @@ namespace Ref {
         U32 time
     )
   {
-    // TODO
+    this->RTCWrite_out(0,time);
+    this->tlmWrite_AGG_TIME(time);
+    this->log_ACTIVITY_HI_RTC_COMMAND_SENT(time, SET_EV);
     this->cmdResponse_out(opCode,cmdSeq,Fw::COMMAND_OK);
   }
 

@@ -1,11 +1,13 @@
 <component name="RTC" kind="passive" namespace="Ref">
-    <import_port_type>Ref/CislunarPorts/RTCPortAi.xml</import_port_type>
+    <import_port_type>Ref/CislunarPorts/RTCWritePortAi.xml</import_port_type>
+    <import_port_type>Ref/CislunarPorts/RTCReadPortAi.xml</import_port_type>
     <comment>Component that talks to RTC from RPI</comment>
     <ports>
-        <port name="TimePort" data_type="Ref::RTCPort" kind="sync_input"></port>
+        <port name="WritePort" data_type="Ref::RTCWritePort" kind="sync_input"></port>
+	<port name="ReadPort" data_type="Ref::RTCReadPort" kind="sync_input"></port>
     </ports>
     <commands>
-        <command kind="sync" opcode="0" mnemonic="RTC_COMMAND">
+        <command kind="sync" opcode="0" mnemonic="RTC_CMD_TIME">
             <comment>
             set time
             </comment>
@@ -24,7 +26,7 @@
         </channel>
     </telemetry>
     <events>
-        <event id="0" name="RTC_COMMAND_RECV" severity="ACTIVITY_HI" format_string="RTC CMD RECV: %u %d"  >
+        <event id="0" name="RTC_PORT_CALL" severity="ACTIVITY_HI" format_string="RTC CMD RECV: %u %d"  >
             <comment>
             Math command received
             </comment>

@@ -14,7 +14,7 @@
 
 |Channel Name|ID|Type|Description|
 |---|---|---|---|
-|RTC_TIME|0 (0x0)|U32|The time|
+|AGG_TIME|0 (0x0)|U32|The time|
 
 ## Event List
 
