@@ -20,6 +20,8 @@
 |IMU_ACCX|3 (0x3)|F64||
 |IMU_ACCY|4 (0x4)|F64||
 |IMU_ACCZ|5 (0x5)|F64||
+|IMU_Config1|6 (0x6)|I32||
+|IMU_Config2|7 (0x7)|I32||
 
 ## Event List
 

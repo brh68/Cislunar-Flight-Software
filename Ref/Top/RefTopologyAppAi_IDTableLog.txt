@@ -28,7 +28,7 @@ fileDownlinkBufferManag |  401 (0x191)  |          20           |             20
      fileDownlink       |  501 (0x1f5)  |          20           |             20             |               4               |         4        
       textLogger        |  521 (0x209)  |          20           |             20             |             None              |         0        
         cmdSeq          |  541 (0x21d)  |          23           |            459             |              23               |        23        
-      aggregator        | 1000 (0x3e8)  |          100          |            100             |               2               |         2        
+      aggregator        | 1000 (0x3e8)  |          100          |            100             |               9               |         9        
           rtc           | 1100 (0x44c)  |          100          |            inf.            |               1               |         1        
 -------------------------------------------------------------------------------------------------------------------------------------
 | INSTANCE NAME                 - Name of the instance object.                                                                      |

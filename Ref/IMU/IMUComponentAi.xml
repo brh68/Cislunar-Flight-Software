@@ -24,6 +24,8 @@
 	<channel id="3" name="IMU_ACCX" data_type="F64"></channel>
 	<channel id="4" name="IMU_ACCY" data_type="F64"></channel>
 	<channel id="5" name="IMU_ACCZ" data_type="F64"></channel>
+	<channel id="6" name="IMU_Config1" data_type="I32"></channel>
+	<channel id="7" name="IMU_Config2" data_type="I32"></channel>
     </telemetry>
     <events>
         <event id="0" name="IMU_READ" severity="ACTIVITY_HI" format_string="IMU Result: gX: %dl, gY: %dl, gZ: %dl, aX: %dl, aY: %dl, aZ: %dl\n"  >

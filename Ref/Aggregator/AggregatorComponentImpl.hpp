@@ -69,6 +69,22 @@ namespace Ref {
           U32 time 
       );
 
+      //! Implementation for AGG_CONFIG_IMU command handler
+      //! 
+      void AGG_CONFIG_IMU_cmdHandler(
+          const FwOpcodeType opCode, /*!< The opcode*/
+          const U32 cmdSeq, /*!< The command sequence number*/
+          I32 configVal1, 
+          I32 configVal2 
+      );
+
+      //! Implementation for AGG_GET_IMU_DATA command handler
+      //! gets gyro and accelerometer daat
+      void AGG_GET_IMU_DATA_cmdHandler(
+          const FwOpcodeType opCode, /*!< The opcode*/
+          const U32 cmdSeq /*!< The command sequence number*/
+      );
+
 
     };
 

@@ -77,4 +77,39 @@ namespace Ref {
     this->cmdResponse_out(opCode,cmdSeq,Fw::COMMAND_OK);
   }
 
+  void AggregatorComponentImpl ::
+    AGG_CONFIG_IMU_cmdHandler(
+        const FwOpcodeType opCode,
+        const U32 cmdSeq,
+        I32 configVal1,
+        I32 configVal2
+    )
+  {
+    this->IMUConfig_out(0, configVal1, configVal2);
+    this->tlmWrite_AGG_IMU_Config1(configVal1);
+    this->tlmWrite_AGG_IMU_Config2(configVal2);
+    this->log_ACTIVITY_HI_IMU_COMMAND_SENT(IMU_CONFIG);
+    this->cmdResponse_out(opCode,cmdSeq,Fw::COMMAND_OK);
+  }
+
+  void AggregatorComponentImpl ::
+    AGG_GET_IMU_DATA_cmdHandler(
+        const FwOpcodeType opCode,
+        const U32 cmdSeq
+    )
+  {
+    F64 *ret = this->IMURead_out(0);
+    this->tlmWrite_AGG_GyroX(ret[0]);
+    this->tlmWrite_AGG_GyroY(ret[1]);
+    this->tlmWrite_AGG_GyroZ(ret[2]);
+    this->tlmWrite_AGG_AccX(ret[3]);
+    this->tlmWrite_AGG_AccY(ret[4]);
+    this->tlmWrite_AGG_AccZ(ret[5]);
+    this->log_ACTIVITY_HI_IMU_COMMAND_SENT(IMU_READ);
+    this->cmdResponse_out(opCode,cmdSeq,Fw::COMMAND_OK);
+  }
+
+
+
+
 } // end namespace Ref

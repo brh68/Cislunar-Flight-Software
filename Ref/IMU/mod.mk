@@ -1,1 +1,3 @@
-SRC =  IMUComponentAi.xml
+SRC =  IMUComponentAi.xml IMUComponentImpl.cpp
+
+HDR = IMUComponentImpl.hpp
