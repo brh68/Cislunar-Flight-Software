@@ -1,0 +1,4 @@
+<interface name="IMUReadPort" namespace="Ref">
+	<return type="F64" pass_by="pointer"/>
+</interface>
+

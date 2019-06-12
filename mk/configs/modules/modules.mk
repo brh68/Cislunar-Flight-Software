@@ -95,7 +95,8 @@ REF_MODULES := \
 	Ref/PingReceiver \
 	Ref/CislunarPorts \
 	Ref/RTC \
-	Ref/Aggregator
+	Ref/Aggregator \
+	Ref/IMU
 	
 Ref_MODULES := \
 	\

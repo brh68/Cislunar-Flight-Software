@@ -1,0 +1,47 @@
+<component name="IMU" kind="passive" namespace="Ref">
+    <import_port_type>Ref/CislunarPorts/IMUConfigPortAi.xml</import_port_type>
+    <import_port_type>Ref/CislunarPorts/IMUReadPortAi.xml</import_port_type>
+    <comment>Component that talks to RTC from RPI</comment>
+    <ports>
+	<port name="ConfigPort" data_type="Ref::IMUConfigPort" kind="sync_input"></port>
+	<port name="ReadPort" data_type="Ref::IMUReadPort" kind="sync_input"></port>
+    </ports>
+    <commands>
+        <command kind="sync" opcode="0" mnemonic="IMU_CONFIGURE">
+            <comment>
+            set time
+            </comment>
+            <args>
+                <arg name="configVal1" type="I32"></arg>       
+                <arg name="configVal2" type="I32"></arg>           
+             </args>
+        </command>
+    </commands>
+    <telemetry>
+        <channel id="0" name="IMU_GYROX" data_type="F64"></channel>
+	<channel id="1" name="IMU_GYROY" data_type="F64"></channel>
+	<channel id="2" name="IMU_GYROZ" data_type="F64"></channel>
+	<channel id="3" name="IMU_ACCX" data_type="F64"></channel>
+	<channel id="4" name="IMU_ACCY" data_type="F64"></channel>
+	<channel id="5" name="IMU_ACCZ" data_type="F64"></channel>
+    </telemetry>
+    <events>
+        <event id="0" name="IMU_READ" severity="ACTIVITY_HI" format_string="IMU Result: gX: %dl, gY: %dl, gZ: %dl, aX: %dl, aY: %dl, aZ: %dl\n"  >
+            <args>
+                <arg name="gyroXEv" type="F64"></arg>  
+                <arg name="gyroYEv" type="F64"></arg> 
+                <arg name="gyroZEv" type="F64"></arg> 
+                <arg name="accXEv" type="F64"></arg> 
+                <arg name="accYEv" type="F64"></arg> 
+                <arg name="accZEv" type="F64"></arg>                                   
+            </args>
+        </event>
+	<event id="1" name="IMU_CONFIGURED" severity="ACTIVITY_HI" format_string="IMU Config: Val1: %i, Val2: %i\n">
+	    <args>
+		<arg name="IMU_CONFIG_VAL1" type="I32"></arg>
+		<arg name="IMU_CONFIG_VAL2" type="I32"></arg>
+	    </args>
+	</event>
+    </events>
+</component>
+

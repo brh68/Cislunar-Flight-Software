@@ -1,1 +1,2 @@
-SRC = RTCWritePortAi.xml  RTCReadPortAi.xml
+SRC = RTCWritePortAi.xml  RTCReadPortAi.xml \
+IMUConfigPortAi.xml IMUReadPortAi.xml
