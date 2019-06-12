@@ -818,21 +818,21 @@
 
 <connection name = "AggregatorReg">
 	 <source component = "aggregator" port = "CmdReg" type = "CmdReg" num = "0"/>
- 	 <target component = "cmdDisp" port = "compCmdReg" type = "CmdReg" num = "100"/>
+ 	 <target component = "cmdDisp" port = "compCmdReg" type = "CmdReg" num = "14"/>
 </connection>
 <connection name = "RTCReg">
 	 <source component = "rtc" port = "CmdReg" type = "CmdReg" num = "0"/>
- 	 <target component = "cmdDisp" port = "compCmdReg" type = "CmdReg" num = "101"/>
+ 	 <target component = "cmdDisp" port = "compCmdReg" type = "CmdReg" num = "15"/>
 </connection>
 
 <!-- Command Dispatch Ports - dispatch port number must match registration port number for each component -->
 
 <connection name = "AggregatorDisp">
-	 <source component = "cmdDisp" port = "compCmdSend" type = "Cmd" num = "100"/>
+	 <source component = "cmdDisp" port = "compCmdSend" type = "Cmd" num = "14"/>
  	 <target component = "aggregator" port = "CmdDisp" type = "Cmd" num = "0"/>
 </connection>
 <connection name = "RTCDisp">
-	 <source component = "cmdDisp" port = "compCmdSend" type = "Cmd" num = "101"/>
+	 <source component = "cmdDisp" port = "compCmdSend" type = "Cmd" num = "15"/>
  	 <target component = "rtc" port = "CmdDisp" type = "Cmd" num = "0"/>
 </connection>
 
