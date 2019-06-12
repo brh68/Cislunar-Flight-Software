@@ -85,14 +85,17 @@ LINUX_DRV_MODULES := \
 	Drv/LinuxSpiDriver \
 	Drv/SerialDriverPorts \
 	Drv/SpiDriverPorts \
-	Drv/GpioDriverPorts
+	Drv/GpioDriverPorts 
 	
 REF_MODULES := \
 	Ref/Top \
 	Ref/RecvBuffApp \
 	Ref/SendBuffApp \
 	Ref/SignalGen \
-	Ref/PingReceiver
+	Ref/PingReceiver \
+	Ref/CislunarPorts \
+	Ref/RTC \
+	Ref/Aggregator
 	
 Ref_MODULES := \
 	\

@@ -1,0 +1,6 @@
+<interface name="RTCWritePort" namespace="Ref">
+    	<args>
+        	<arg name="time" type="U32"></arg>
+    	</args>
+</interface>
+
