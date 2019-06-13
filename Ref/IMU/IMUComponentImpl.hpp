@@ -57,14 +57,15 @@ namespace Ref {
       //!
       void ConfigPort_handler(
           const NATIVE_INT_TYPE portNum, /*!< The port number*/
-          I32 configVal1, 
-          I32 configVal2 
+          I32 GyroConfig, 
+          I32 AccConfig 
       );
 
       //! Handler implementation for ReadPort
       //!
       F64 *ReadPort_handler(
-          const NATIVE_INT_TYPE portNum /*!< The port number*/
+          const NATIVE_INT_TYPE portNum, /*!< The port number*/
+          data dataType 
       );
 
     PRIVATE:

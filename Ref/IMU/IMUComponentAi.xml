@@ -12,8 +12,8 @@
             set time
             </comment>
             <args>
-                <arg name="configVal1" type="I32"></arg>       
-                <arg name="configVal2" type="I32"></arg>           
+                <arg name="gyroConfig" type="I32"></arg>       
+                <arg name="accConfig" type="I32"></arg>           
              </args>
         </command>
     </commands>
@@ -24,24 +24,31 @@
 	<channel id="3" name="IMU_ACCX" data_type="F64"></channel>
 	<channel id="4" name="IMU_ACCY" data_type="F64"></channel>
 	<channel id="5" name="IMU_ACCZ" data_type="F64"></channel>
-	<channel id="6" name="IMU_Config1" data_type="I32"></channel>
-	<channel id="7" name="IMU_Config2" data_type="I32"></channel>
+	<channel id="6" name="IMU_MAGX" data_type="F64"></channel>
+	<channel id="7" name="IMU_MAGY" data_type="F64"></channel>
+	<channel id="8" name="IMU_MAGZ" data_type="F64"></channel>
+	<channel id="9" name="IMU_GyroConfig" data_type="I32"></channel>
+	<channel id="10" name="IMU_AccConfig" data_type="I32"></channel>
     </telemetry>
     <events>
-        <event id="0" name="IMU_READ" severity="ACTIVITY_HI" format_string="IMU Result: gX: %dl, gY: %dl, gZ: %dl, aX: %dl, aY: %dl, aZ: %dl\n"  >
+        <event id="0" name="IMU_READ" severity="ACTIVITY_HI" format_string="IMU Result for operation %d: X: %f, Y:%f, Z: %f\n"  >
             <args>
-                <arg name="gyroXEv" type="F64"></arg>  
-                <arg name="gyroYEv" type="F64"></arg> 
-                <arg name="gyroZEv" type="F64"></arg> 
-                <arg name="accXEv" type="F64"></arg> 
-                <arg name="accYEv" type="F64"></arg> 
-                <arg name="accZEv" type="F64"></arg>                                   
+		<arg name="typeEV" type="ENUM">
+		    <enum name="imuTypeEV">
+			<item name="GYRO_EV"/>
+			<item name="ACC_EV"/>
+			<item name="MAG_EV"/>
+		    </enum>
+		</arg>
+                <arg name="XEv" type="F64"></arg>  
+                <arg name="YEv" type="F64"></arg> 
+                <arg name="ZEv" type="F64"></arg>                                  
             </args>
         </event>
-	<event id="1" name="IMU_CONFIGURED" severity="ACTIVITY_HI" format_string="IMU Config: Val1: %i, Val2: %i\n">
+	<event id="1" name="IMU_CONFIGURED" severity="ACTIVITY_HI" format_string="IMU Config: Gyro: %i, Acc: %i\n">
 	    <args>
-		<arg name="IMU_CONFIG_VAL1" type="I32"></arg>
-		<arg name="IMU_CONFIG_VAL2" type="I32"></arg>
+		<arg name="IMU_GYRO_CONFIG" type="I32"></arg>
+		<arg name="IMU_ACC_CONFIG" type="I32"></arg>
 	    </args>
 	</event>
     </events>

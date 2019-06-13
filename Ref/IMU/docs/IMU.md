@@ -7,8 +7,8 @@
 |Mnemonic|ID|Description|Arg Name|Arg Type|Comment
 |---|---|---|---|---|---|
 |IMU_CONFIGURE|0 (0x0)|set time| | |
-| | | |configVal1|I32||
-| | | |configVal2|I32||
+| | | |gyroConfig|I32||
+| | | |accConfig|I32||
 
 ## Telemetry Channel List
 
@@ -20,20 +20,21 @@
 |IMU_ACCX|3 (0x3)|F64||
 |IMU_ACCY|4 (0x4)|F64||
 |IMU_ACCZ|5 (0x5)|F64||
-|IMU_Config1|6 (0x6)|I32||
-|IMU_Config2|7 (0x7)|I32||
+|IMU_MAGX|6 (0x6)|F64||
+|IMU_MAGY|7 (0x7)|F64||
+|IMU_MAGZ|8 (0x8)|F64||
+|IMU_GyroConfig|9 (0x9)|I32||
+|IMU_AccConfig|10 (0xa)|I32||
 
 ## Event List
 
 |Event Name|ID|Description|Arg Name|Arg Type|Arg Size|Description
 |---|---|---|---|---|---|---|
 |IMU_READ|0 (0x0)|| | | | |
-| | | |gyroXEv|F64|||
-| | | |gyroYEv|F64|||
-| | | |gyroZEv|F64|||
-| | | |accXEv|F64|||
-| | | |accYEv|F64|||
-| | | |accZEv|F64|||
+| | | |typeEV|imuTypeEV|||
+| | | |XEv|F64|||
+| | | |YEv|F64|||
+| | | |ZEv|F64|||
 |IMU_CONFIGURED|1 (0x1)|| | | | |
-| | | |IMU_CONFIG_VAL1|I32|||
-| | | |IMU_CONFIG_VAL2|I32|||
+| | | |IMU_GYRO_CONFIG|I32|||
+| | | |IMU_ACC_CONFIG|I32|||

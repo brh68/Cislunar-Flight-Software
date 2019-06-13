@@ -32,23 +32,25 @@
 <!-- IMU Commands -->
 	<command kind="async" opcode="2" mnemonic="AGG_CONFIG_IMU">
 		<args>
-			<arg name="configVal1" type="I32"></arg>
-			<arg name="configVal2" type="I32"></arg>
+			<arg name="GyroConfig" type="I32"></arg>
+			<arg name="AccConfig" type="I32"></arg>
 		</args>
 	</command>
 	<command kind="async" opcode="3" mnemonic="AGG_GET_IMU_DATA">
-		<comment>
-		gets gyro and accelerometer daat
-		</comment>
+	    <args>
+		<arg name="Sensor" type="ENUM">
+		    <enum name="SensorType">
+			<item name="GYRO"/>
+		    	<item name="ACC"/>
+			<item name="MAG"/>
+		    </enum>
+		</arg>
+	    </args>
 	</command>
     </commands>
     <telemetry>
 <!-- RTC Telemetry -->
-        <channel id="0" name="AGG_TIME" data_type="U32">
-            <comment>
-            The time
-            </comment>
-        </channel>
+        <channel id="0" name="AGG_TIME" data_type="U32"></channel>
 <!-- IMU Telemetry -->
 	<channel id="1" name="AGG_GyroX" data_type = "F64"></channel>
 	<channel id="2" name="AGG_GyroY" data_type = "F64"></channel>
@@ -56,8 +58,11 @@
 	<channel id="4" name="AGG_AccX" data_type = "F64"></channel>
 	<channel id="5" name="AGG_AccY" data_type = "F64"></channel>
 	<channel id="6" name="AGG_AccZ" data_type = "F64"></channel>
-	<channel id="7" name="AGG_IMU_Config1" data_type="I32"></channel>
-	<channel id="8" name="AGG_IMU_Config2" data_type="I32"></channel>
+	<channel id="7" name="AGG_MagX" data_type = "F64"></channel>
+	<channel id="8" name="AGG_MagY" data_type = "F64"></channel>
+	<channel id="9" name="AGG_MagZ" data_type = "F64"></channel>
+	<channel id="10" name="AGG_IMU_GyroConfig" data_type="I32"></channel>
+	<channel id="11" name="AGG_IMU_AccConfig" data_type="I32"></channel>
     </telemetry>
     <events>
 <!-- RTC Events -->
@@ -78,11 +83,12 @@
         <event id="1" name="IMU_COMMAND_SENT" severity="ACTIVITY_HI" format_string="IMU CMD SENT: %d"  >
             <args>             
                 <arg name="opEv" type="ENUM">
-                    <comment>The requested operation</comment>
-	                <enum name="IMUEventEnum">
-	                    <item name="IMU_CONFIG"/>
-	                    <item name="IMU_READ"/>          
-	                </enum>
+	            <enum name="IMUEventEnum">
+	                <item name="IMU_CONFIG"/>
+	                <item name="IMU_READ_GYRO"/>    
+	                <item name="IMU_READ_ACC"/>  
+	                <item name="IMU_READ_MAG"/>        
+	            </enum>
                 </arg>          
             </args>
         </event>

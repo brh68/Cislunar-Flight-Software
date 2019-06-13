@@ -1,7 +1,7 @@
 <interface name="IMUConfigPort" namespace="Ref">
 	<args>
-		<arg name="configVal1" type="I32"></arg>
-		<arg name="configVal2" type="I32"></arg>
+		<arg name="GyroConfig" type="I32"></arg>
+		<arg name="AccConfig" type="I32"></arg>
 	</args>
 </interface>
 

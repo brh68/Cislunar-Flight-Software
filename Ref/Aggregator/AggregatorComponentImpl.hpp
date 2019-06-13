@@ -74,15 +74,16 @@ namespace Ref {
       void AGG_CONFIG_IMU_cmdHandler(
           const FwOpcodeType opCode, /*!< The opcode*/
           const U32 cmdSeq, /*!< The command sequence number*/
-          I32 configVal1, 
-          I32 configVal2 
+          I32 GyroConfig, 
+          I32 AccConfig 
       );
 
       //! Implementation for AGG_GET_IMU_DATA command handler
-      //! gets gyro and accelerometer daat
+      //! 
       void AGG_GET_IMU_DATA_cmdHandler(
           const FwOpcodeType opCode, /*!< The opcode*/
-          const U32 cmdSeq /*!< The command sequence number*/
+          const U32 cmdSeq, /*!< The command sequence number*/
+          SensorType Sensor 
       );
 
 

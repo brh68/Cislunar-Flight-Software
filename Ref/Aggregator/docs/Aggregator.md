@@ -10,23 +10,27 @@
 |SET_RTC_DATA|1 (0x1)|set time| | |
 | | | |time|U32||
 |AGG_CONFIG_IMU|2 (0x2)|| | |
-| | | |configVal1|I32||
-| | | |configVal2|I32||
-|AGG_GET_IMU_DATA|3 (0x3)|gets gyro and accelerometer daat| | |
+| | | |GyroConfig|I32||
+| | | |AccConfig|I32||
+|AGG_GET_IMU_DATA|3 (0x3)|| | |
+| | | |Sensor|SensorType||
 
 ## Telemetry Channel List
 
 |Channel Name|ID|Type|Description|
 |---|---|---|---|
-|AGG_TIME|0 (0x0)|U32|The time|
+|AGG_TIME|0 (0x0)|U32||
 |AGG_GyroX|1 (0x1)|F64||
 |AGG_GyroY|2 (0x2)|F64||
 |AGG_GyroZ|3 (0x3)|F64||
 |AGG_AccX|4 (0x4)|F64||
 |AGG_AccY|5 (0x5)|F64||
 |AGG_AccZ|6 (0x6)|F64||
-|AGG_IMU_Config1|7 (0x7)|I32||
-|AGG_IMU_Config2|8 (0x8)|I32||
+|AGG_MagX|7 (0x7)|F64||
+|AGG_MagY|8 (0x8)|F64||
+|AGG_MagZ|9 (0x9)|F64||
+|AGG_IMU_GyroConfig|10 (0xa)|I32||
+|AGG_IMU_AccConfig|11 (0xb)|I32||
 
 ## Event List
 
@@ -36,4 +40,4 @@
 | | | |timeEv|U32|||
 | | | |opEv|MathOpEv||The requested operation|
 |IMU_COMMAND_SENT|1 (0x1)|| | | | |
-| | | |opEv|IMUEventEnum||The requested operation|
+| | | |opEv|IMUEventEnum|||

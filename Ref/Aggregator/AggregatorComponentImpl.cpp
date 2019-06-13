@@ -81,13 +81,13 @@ namespace Ref {
     AGG_CONFIG_IMU_cmdHandler(
         const FwOpcodeType opCode,
         const U32 cmdSeq,
-        I32 configVal1,
-        I32 configVal2
+        I32 GyroConfig,
+        I32 AccConfig
     )
   {
-    this->IMUConfig_out(0, configVal1, configVal2);
-    this->tlmWrite_AGG_IMU_Config1(configVal1);
-    this->tlmWrite_AGG_IMU_Config2(configVal2);
+    this->IMUConfig_out(0, GyroConfig, AccConfig);
+    this->tlmWrite_AGG_IMU_GyroConfig(GyroConfig);
+    this->tlmWrite_AGG_IMU_AccConfig(AccConfig);
     this->log_ACTIVITY_HI_IMU_COMMAND_SENT(IMU_CONFIG);
     this->cmdResponse_out(opCode,cmdSeq,Fw::COMMAND_OK);
   }
@@ -95,17 +95,43 @@ namespace Ref {
   void AggregatorComponentImpl ::
     AGG_GET_IMU_DATA_cmdHandler(
         const FwOpcodeType opCode,
-        const U32 cmdSeq
+        const U32 cmdSeq,
+	SensorType Sensor
     )
   {
-    F64 *ret = this->IMURead_out(0);
-    this->tlmWrite_AGG_GyroX(ret[0]);
-    this->tlmWrite_AGG_GyroY(ret[1]);
-    this->tlmWrite_AGG_GyroZ(ret[2]);
-    this->tlmWrite_AGG_AccX(ret[3]);
-    this->tlmWrite_AGG_AccY(ret[4]);
-    this->tlmWrite_AGG_AccZ(ret[5]);
-    this->log_ACTIVITY_HI_IMU_COMMAND_SENT(IMU_READ);
+    F64 *ret;
+    data op;
+    IMUEventEnum opEv;
+    switch(Sensor){
+	case GYRO:
+	    op = IMU_GYRO;
+	    opEv = IMU_READ_GYRO;
+	    ret=this->IMURead_out(0, op);
+	    this->tlmWrite_AGG_GyroX(ret[0]);
+	    this->tlmWrite_AGG_GyroY(ret[1]);
+	    this->tlmWrite_AGG_GyroZ(ret[2]);
+	    break;
+	case ACC:
+	    op= IMU_ACC;
+	    opEv=IMU_READ_ACC;
+	    ret=this->IMURead_out(0, op);
+	    this->tlmWrite_AGG_AccX(ret[0]);
+	    this->tlmWrite_AGG_AccY(ret[1]);
+	    this->tlmWrite_AGG_AccZ(ret[2]);
+	    break;
+	case MAG:
+	    op = IMU_MAG;
+	    opEv=IMU_READ_MAG;
+	    ret=this->IMURead_out(0, op);
+	    this->tlmWrite_AGG_MagX(ret[0]);
+	    this->tlmWrite_AGG_MagY(ret[1]);
+	    this->tlmWrite_AGG_MagZ(ret[2]);
+	    break;
+	default:
+	    FW_ASSERT(Sensor, 0);
+    }
+
+    this->log_ACTIVITY_HI_IMU_COMMAND_SENT(opEv);
     this->cmdResponse_out(opCode,cmdSeq,Fw::COMMAND_OK);
   }
 
