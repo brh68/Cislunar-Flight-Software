@@ -195,6 +195,13 @@ Ref::RTCComponentImpl rtc
 #endif
 ;
 
+Ref::IMUComponentImpl imu
+#if FW_OBJECT_NAMES == 1
+("imu")
+#endif
+;
+
+
 #if FW_OBJECT_REGISTRATION == 1
 
 void dumparch(void) {
@@ -266,6 +273,7 @@ void constructApp(int port_number, char* hostname) {
 	pingRcvr.init(10);
     aggregator.init(10,0);
     rtc.init(0);
+    imu.init(0);
     // Connect rate groups to rate group driver
     constructRefArchitecture();
 
@@ -286,6 +294,7 @@ void constructApp(int port_number, char* hostname) {
 	pingRcvr.regCommands();
     aggregator.regCommands();
     rtc.regCommands();
+    imu.regCommands();
 
     // read parameters
     prmDb.readParamFile();

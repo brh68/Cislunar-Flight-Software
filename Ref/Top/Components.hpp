@@ -31,6 +31,7 @@ void exitTasks(void);
 
 #include <Ref/Aggregator/AggregatorComponentImpl.hpp>
 #include <Ref/RTC/RTCComponentImpl.hpp>
+#include <Ref/IMU/IMUComponentImpl.hpp>
 
 extern Svc::RateGroupDriverImpl rateGroupDriverComp;
 extern Svc::ActiveRateGroupImpl rateGroup1Comp, rateGroup2Comp, rateGroup3Comp;
@@ -59,5 +60,6 @@ extern Ref::PingReceiverComponentImpl pingRcvr;
 
 extern Ref::AggregatorComponentImpl aggregator;
 extern Ref::RTCComponentImpl rtc;
+extern Ref::IMUComponentImpl imu;
 
 #endif
