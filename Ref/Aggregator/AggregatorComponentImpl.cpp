@@ -135,6 +135,46 @@ namespace Ref {
     this->cmdResponse_out(opCode,cmdSeq,Fw::COMMAND_OK);
   }
 
+  void AggregatorComponentImpl ::
+    AGG_CONFIG_ADC_cmdHandler(
+        const FwOpcodeType opCode,
+        const U32 cmdSeq,
+        F64 VoltageGain,
+        I32 SampleRate
+    )
+  {
+    this->ADCConfig_out(0, VoltageGain, SampleRate);
+    this->tlmWrite_AGG_ADC_VGAIN(VoltageGain);
+    this->tlmWrite_AGG_ADC_SAMPLE_RATE(SampleRate);
+    this->log_ACTIVITY_HI_ADC_COMMAND_SENT(ADC_CONFIG);
+    this->cmdResponse_out(opCode,cmdSeq,Fw::COMMAND_OK);
+  }
+
+  void AggregatorComponentImpl ::
+    AGG_GET_ADC_TEMP_cmdHandler(
+        const FwOpcodeType opCode,
+        const U32 cmdSeq,
+        F64 AmbientTemp
+    )
+  {
+    F64 ret = this->ADCTemp_out(0, AmbientTemp);
+    this->tlmWrite_AGG_ADC_TEMP(ret);
+    this->log_ACTIVITY_HI_ADC_COMMAND_SENT(ADC_READ_TEMP);
+    this->cmdResponse_out(opCode,cmdSeq,Fw::COMMAND_OK);
+  }
+
+  void AggregatorComponentImpl ::
+    AGG_GET_ADC_PRESSURE_cmdHandler(
+        const FwOpcodeType opCode,
+        const U32 cmdSeq
+    )
+  {
+    F64 ret=this->ADCPressure_out(0);
+    this->tlmWrite_AGG_ADC_PRESSURE(ret);
+    this->log_ACTIVITY_HI_ADC_COMMAND_SENT(ADC_READ_PRESSURE);
+    this->cmdResponse_out(opCode,cmdSeq,Fw::COMMAND_OK);
+  }
+
 
 
 

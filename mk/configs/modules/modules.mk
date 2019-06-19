@@ -96,7 +96,8 @@ REF_MODULES := \
 	Ref/CislunarPorts \
 	Ref/RTC \
 	Ref/Aggregator \
-	Ref/IMU
+	Ref/IMU \
+	Ref/ADC
 	
 Ref_MODULES := \
 	\

@@ -1,0 +1,7 @@
+<interface name="ADCConfigPort" namespace="Ref">
+	<args>
+		<arg name="VoltageGain" type="F64"></arg>
+		<arg name="SampleRate" type="I32"></arg>
+	</args>
+</interface>
+

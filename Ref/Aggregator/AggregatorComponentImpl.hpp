@@ -86,6 +86,30 @@ namespace Ref {
           SensorType Sensor 
       );
 
+      //! Implementation for AGG_CONFIG_ADC command handler
+      //! 
+      void AGG_CONFIG_ADC_cmdHandler(
+          const FwOpcodeType opCode, /*!< The opcode*/
+          const U32 cmdSeq, /*!< The command sequence number*/
+          F64 VoltageGain, 
+          I32 SampleRate 
+      );
+
+      //! Implementation for AGG_GET_ADC_TEMP command handler
+      //! 
+      void AGG_GET_ADC_TEMP_cmdHandler(
+          const FwOpcodeType opCode, /*!< The opcode*/
+          const U32 cmdSeq, /*!< The command sequence number*/
+          F64 AmbientTemp 
+      );
+
+      //! Implementation for AGG_GET_ADC_PRESSURE command handler
+      //! 
+      void AGG_GET_ADC_PRESSURE_cmdHandler(
+          const FwOpcodeType opCode, /*!< The opcode*/
+          const U32 cmdSeq /*!< The command sequence number*/
+      );
+
 
     };
 

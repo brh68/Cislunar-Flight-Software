@@ -5,7 +5,10 @@
 <!-- IMU Port Imports -->
     <import_port_type>Ref/CislunarPorts/IMUConfigPortAi.xml</import_port_type>
     <import_port_type>Ref/CislunarPorts/IMUReadPortAi.xml</import_port_type>
-
+<!-- ADC Port Imports -->
+    <import_port_type>Ref/CislunarPorts/ADCTempPortAi.xml</import_port_type>
+    <import_port_type>Ref/CislunarPorts/ADCPressurePortAi.xml</import_port_type>
+    <import_port_type>Ref/CislunarPorts/ADCConfigPortAi.xml</import_port_type>
     <ports>
 <!-- RTC Port Creation -->
         <port name="RTCWrite" data_type="Ref::RTCWritePort" kind="output"></port>
@@ -13,6 +16,10 @@
 <!-- IMU Port Creation -->
 	<port name="IMUConfig" data_type="Ref::IMUConfigPort" kind="output"></port>
 	<port name="IMURead" data_type="Ref::IMUReadPort" kind="output"></port>
+<!-- ADC Port Creation -->
+	<port name="ADCPressure" data_type="Ref::ADCPressurePort" kind="output"></port>
+	<port name="ADCTemp" data_type="Ref::ADCTempPort" kind="output"></port>
+	<port name="ADCConfig" data_type="Ref::ADCConfigPort" kind="output"></port>
     </ports>
     <commands>
 <!-- RTC Commands -->
@@ -47,6 +54,20 @@
 		</arg>
 	    </args>
 	</command>
+<!-- ADC Commands -->
+	<command kind="async" opcode="4" mnemonic="AGG_CONFIG_ADC">
+		<args>
+			<arg name="VoltageGain" type="F64"></arg>
+			<arg name="SampleRate" type="I32"></arg>
+		</args>
+	</command>
+	<command kind="async" opcode="5" mnemonic="AGG_GET_ADC_TEMP">
+		<args>
+			<arg name="AmbientTemp" type="F64"></arg>
+		</args>
+	</command>
+	<command kind="async" opcode="6" mnemonic="AGG_GET_ADC_PRESSURE">
+	</command>
     </commands>
     <telemetry>
 <!-- RTC Telemetry -->
@@ -63,6 +84,11 @@
 	<channel id="9" name="AGG_MagZ" data_type = "F64"></channel>
 	<channel id="10" name="AGG_IMU_GyroConfig" data_type="I32"></channel>
 	<channel id="11" name="AGG_IMU_AccConfig" data_type="I32"></channel>
+<!--ADC Telemetry -->
+	<channel id="12" name="AGG_ADC_VGAIN" data_type="F64"></channel>
+	<channel id="13" name="AGG_ADC_SAMPLE_RATE" data_type="I32"></channel>
+	<channel id="14" name="AGG_ADC_TEMP" data_type="F64"></channel>
+	<channel id="15" name="AGG_ADC_PRESSURE" data_type="F64"></channel>
     </telemetry>
     <events>
 <!-- RTC Events -->
@@ -88,6 +114,18 @@
 	                <item name="IMU_READ_GYRO"/>    
 	                <item name="IMU_READ_ACC"/>  
 	                <item name="IMU_READ_MAG"/>        
+	            </enum>
+                </arg>          
+            </args>
+        </event>
+<!-- ADC Events -->
+        <event id="2" name="ADC_COMMAND_SENT" severity="ACTIVITY_HI" format_string="ADC CMD SENT: %d"  >
+            <args>             
+                <arg name="opEv" type="ENUM">
+	            <enum name="ADCEventEnum">
+	                <item name="ADC_CONFIG"/>
+	                <item name="ADC_READ_TEMP"/>    
+	                <item name="ADC_READ_PRESSURE"/>        
 	            </enum>
                 </arg>          
             </args>

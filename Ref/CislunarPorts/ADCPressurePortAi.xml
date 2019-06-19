@@ -1,0 +1,4 @@
+<interface name="ADCPressurePort" namespace="Ref">
+    <return type="F64" pass_by="value"/>
+</interface>
+

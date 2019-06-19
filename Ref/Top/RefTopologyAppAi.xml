@@ -32,6 +32,7 @@
 	<import_component_type>Ref/Aggregator/AggregatorComponentAi.xml</import_component_type>
 	<import_component_type>Ref/RTC/RTCComponentAi.xml</import_component_type>
 	<import_component_type>Ref/IMU/IMUComponentAi.xml</import_component_type>
+	<import_component_type>Ref/ADC/ADCComponentAi.xml</import_component_type>
 
 
    <instance namespace="Svc" name="fatalHandler" type="FatalHandler" base_id="1"  base_id_window="20" />
@@ -93,6 +94,7 @@
    <instance namespace="Ref" name="aggregator" type="Aggregator" base_id="1000" base_id_window="100"/>
    <instance namespace="Ref" name="rtc" type="RTC" base_id="1100" base_id_window="100"/>
    <instance namespace="Ref" name="imu" type="IMU" base_id="1200" base_id_window="100"/>
+   <instance namespace="Ref" name="adc" type="ADC" base_id="1300" base_id_window="100"/>
 
 
 <connection name = "Connection1">
@@ -830,6 +832,10 @@
 	 <source component = "imu" port = "CmdReg" type = "CmdReg" num = "0"/>
  	 <target component = "cmdDisp" port = "compCmdReg" type = "CmdReg" num = "16"/>
 </connection>
+<connection name = "ADCReg">
+	 <source component = "adc" port = "CmdReg" type = "CmdReg" num = "0"/>
+ 	 <target component = "cmdDisp" port = "compCmdReg" type = "CmdReg" num = "17"/>
+</connection>
 
 <!-- Command Dispatch Ports - dispatch port number must match registration port number for each component -->
 
@@ -845,6 +851,10 @@
 	 <source component = "cmdDisp" port = "compCmdSend" type = "Cmd" num = "16"/>
  	 <target component = "imu" port = "CmdDisp" type = "Cmd" num = "0"/>
 </connection>
+<connection name = "ADCDisp">
+	 <source component = "cmdDisp" port = "compCmdSend" type = "Cmd" num = "17"/>
+ 	 <target component = "adc" port = "CmdDisp" type = "Cmd" num = "0"/>
+</connection>
 
 <!-- Command Reply Ports - go to the same response port on the dispathcer -->
 
@@ -858,6 +868,10 @@
 </connection>
 <connection name = "IMUReply">
 	 <source component = "imu" port = "CmdStatus" type = "CmdResponse" num = "0"/>
+ 	 <target component = "cmdDisp" port = "compCmdStat" type = "CmdResponse" num = "0"/>
+</connection>
+<connection name = "ADCReply">
+	 <source component = "adc" port = "CmdStatus" type = "CmdResponse" num = "0"/>
  	 <target component = "cmdDisp" port = "compCmdStat" type = "CmdResponse" num = "0"/>
 </connection>
 
@@ -875,6 +889,10 @@
 	 <source component = "imu" port = "Log" type = "Log" num = "0"/>
  	 <target component = "eventLogger" port = "LogRecv" type = "Log" num = "0"/>
 </connection>
+<connection name = "ADCLog">
+	 <source component = "adc" port = "Log" type = "Log" num = "0"/>
+ 	 <target component = "eventLogger" port = "LogRecv" type = "Log" num = "0"/>
+</connection>
 
 <!-- Event logger text connections -->
 
@@ -890,6 +908,10 @@
 	 <source component = "imu" port = "LogText" type = "LogText" num = "0"/>
  	 <target component = "textLogger" port = "TextLogger" type = "LogText" num = "0"/>
 </connection>
+<connection name = "ADCTextLog">
+	 <source component = "adc" port = "LogText" type = "LogText" num = "0"/>
+ 	 <target component = "textLogger" port = "TextLogger" type = "LogText" num = "0"/>
+</connection>
 
 <!-- Telemetry Connections -->
 
@@ -903,6 +925,10 @@
 </connection>
 <connection name = "IMUTextTlm">
 	 <source component = "imu" port = "Tlm" type = "Tlm" num = "0"/>
+ 	 <target component = "chanTlm" port = "TlmRecv" type = "Tlm" num = "0"/>
+</connection>
+<connection name = "ADCTextTlm">
+	 <source component = "adc" port = "Tlm" type = "Tlm" num = "0"/>
  	 <target component = "chanTlm" port = "TlmRecv" type = "Tlm" num = "0"/>
 </connection>
 
@@ -930,5 +956,17 @@
 	 <source component = "aggregator" port = "IMURead" type = "Ref::IMUReadPort" num = "0"/>
  	 <target component = "imu" port = "ReadPort" type = "Ref::IMUReadPort" num = "0"/>
 </connection>
-
+<!-- ADC Connections -->
+<connection name = "ADCPressureConnection">
+	 <source component = "aggregator" port = "ADCPressure" type = "Ref::ADCPressurePort" num = "0"/>
+ 	 <target component = "adc" port = "PressurePort" type = "Ref::ADCPressurePort" num = "0"/>
+</connection>
+<connection name = "ADCTemperatureConnection">
+	 <source component = "aggregator" port = "ADCTemp" type = "Ref::ADCTempPort" num = "0"/>
+ 	 <target component = "adc" port = "TemperaturePort" type = "Ref::ADCTempPort" num = "0"/>
+</connection>
+<connection name = "ADCConfigConnection">
+	 <source component = "aggregator" port = "ADCConfig" type = "Ref::ADCConfigPort" num = "0"/>
+ 	 <target component = "adc" port = "ConfigPort" type = "Ref::ADCConfigPort" num = "0"/>
+</connection>
 </assembly>

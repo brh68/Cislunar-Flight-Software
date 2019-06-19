@@ -201,6 +201,11 @@ Ref::IMUComponentImpl imu
 #endif
 ;
 
+Ref::ADCComponentImpl adc
+#if FW_OBJECT_NAMES == 1
+("adc")
+#endif
+;
 
 #if FW_OBJECT_REGISTRATION == 1
 
@@ -274,6 +279,7 @@ void constructApp(int port_number, char* hostname) {
     aggregator.init(10,0);
     rtc.init(0);
     imu.init(0);
+    adc.init(0);
     // Connect rate groups to rate group driver
     constructRefArchitecture();
 
@@ -295,6 +301,7 @@ void constructApp(int port_number, char* hostname) {
     aggregator.regCommands();
     rtc.regCommands();
     imu.regCommands();
+    adc.regCommands();
 
     // read parameters
     prmDb.readParamFile();
