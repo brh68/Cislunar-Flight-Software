@@ -1,0 +1,13 @@
+<interface name="IMUReadPort" namespace="Rpi">
+    <args>
+	<arg name="dataType" type="ENUM">
+	    <enum name="data">
+		<item name="IMU_GYRO"/>
+		<item name="IMU_ACC"/>
+		<item name="IMU_MAG"/>
+	    </enum>
+	</arg>
+    </args>
+    <return type="F64" pass_by="pointer"/>
+</interface>
+

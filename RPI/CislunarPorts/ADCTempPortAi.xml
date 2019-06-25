@@ -1,0 +1,7 @@
+<interface name="ADCTempPort" namespace="Rpi">
+    <args>
+	<arg name="AmbientTemp" type="F64"></arg>
+    </args>
+    <return type="F64" pass_by="value"/>
+</interface>
+

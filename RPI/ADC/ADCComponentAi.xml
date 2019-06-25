@@ -1,0 +1,44 @@
+<component name="ADC" kind="passive" namespace="Rpi">
+    <import_port_type>RPI/CislunarPorts/ADCConfigPortAi.xml</import_port_type>
+    <import_port_type>RPI/CislunarPorts/ADCTempPortAi.xml</import_port_type>
+    <import_port_type>RPI/CislunarPorts/ADCPressurePortAi.xml</import_port_type>
+    <ports>
+	<port name="ConfigPort" data_type="Rpi::ADCConfigPort" kind="sync_input"></port>
+	<port name="TemperaturePort" data_type="Rpi::ADCTempPort" kind="sync_input"></port>
+	<port name="PressurePort" data_type="Rpi::ADCPressurePort" kind="sync_input"></port>
+    </ports>
+    <commands>
+        <command kind="sync" opcode="0" mnemonic="ADC_CONFIGURE">
+            <args>
+                <arg name="VoltageGain" type="F64"></arg>       
+                <arg name="SampleRate" type="I32"></arg>           
+            </args>
+        </command>
+    </commands>
+    <telemetry>
+        <channel id="0" name="ADC_Temperature" data_type="F64"></channel>
+	<channel id="1" name="ADC_Pressure" data_type="F64"></channel>
+	<channel id="2" name="ADC_VoltageGain" data_type="F64"></channel>
+	<channel id="3" name="ADC_SampleRate" data_type="I32"></channel>
+    </telemetry>
+    <events>
+        <event id="0" name="ADC_READ" severity="ACTIVITY_HI" format_string="ADC Result for operation %d: X: %f"  >
+            <args>
+		<arg name="typeEV" type="ENUM">
+		    <enum name="adcTypeEV">
+			<item name="TEMP_EV"/>
+			<item name="PRESSURE_EV"/>
+		    </enum>
+		</arg>
+                <arg name="value" type="F64"></arg>                                 
+            </args>
+        </event>
+	<event id="1" name="ADC_CONFIGURED" severity="ACTIVITY_HI" format_string="ADC Config: Voltage Gain: %f, Sample Rate: %i\n">
+	    <args>
+		<arg name="ADC_VOLTAGE_GAIN_CONFIG" type="F64"></arg>
+		<arg name="ADC_SAMPLE_RATE_CONFIG" type="I32"></arg>
+	    </args>
+	</event>
+    </events>
+</component>
+
