@@ -11,10 +11,10 @@
 // ======================================================================
 
 
-#include <Ref/Aggregator/AggregatorComponentImpl.hpp>
+#include <RPI/Aggregator/AggregatorComponentImpl.hpp>
 #include "Fw/Types/BasicTypes.hpp"
 
-namespace Ref {
+namespace Rpi {
 
   // ----------------------------------------------------------------------
   // Construction, initialization, and destruction
@@ -178,4 +178,4 @@ namespace Ref {
 
 
 
-} // end namespace Ref
+} // end namespace Rpi

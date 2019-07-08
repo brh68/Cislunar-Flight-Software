@@ -1,6 +1,6 @@
 # derive module name from directory
 
-MODULE_DIR = Ref/Aggregator
+MODULE_DIR = RPI/Aggregator
 MODULE = $(subst /,,$(MODULE_DIR))
 
 BUILD_ROOT ?= $(subst /$(MODULE_DIR),,$(CURDIR))
