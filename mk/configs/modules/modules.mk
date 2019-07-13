@@ -183,7 +183,8 @@ RPI_APP_MODULES := \
 	RPI/ADC \
 	RPI/IMU \
 	RPI/RTC \
-	RPI/Aggregator
+	RPI/Aggregator \
+	RPI/PWR
 	
 RPI_MODULES := \
 	\

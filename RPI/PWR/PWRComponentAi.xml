@@ -1,0 +1,58 @@
+<component name="PWR" kind="passive" namespace="Rpi">
+    <import_port_type>RPI/CislunarPorts/PWRTogglePortAi.xml</import_port_type>
+    <ports>
+	    <port name="OutputTogglePort" data_type="Rpi::PWRTogglePort" kind="sync_input"></port>
+    </ports>
+    <commands>
+        <command kind="sync" opcode="0" mnemonic="PWR_SET_OUTPUT">
+            <args>
+                <arg name="target" type="ENUM">
+                    <enum name="targets">
+                        <item name="out1"/>
+                        <item name="out2"/>
+                        <item name="out3"/>
+                        <item name="out4"/>
+                        <item name="out5"/>
+                        <item name="out6"/>
+                        <item name="PV4"/>
+                        <item name="heat1"/>
+                        <item name="heat2"/>
+                    </enum>
+                </arg>       
+                <arg name="enabled" type="bool"></arg>           
+            </args>
+        </command>
+    </commands>
+    <telemetry>
+        <channel id="0" name="OUTPUT1" data_type="bool"></channel>
+        <channel id="1" name="OUTPUT2" data_type="bool"></channel>
+        <channel id="2" name="OUTPUT3" data_type="bool"></channel>
+        <channel id="3" name="OUTPUT4" data_type="bool"></channel>
+        <channel id="4" name="OUTPUT5" data_type="bool"></channel>
+        <channel id="5" name="OUTPUT6" data_type="bool"></channel>
+        <channel id="6" name="PV4_TLM" data_type="bool"></channel>
+        <channel id="7" name="HEATER1" data_type="bool"></channel>
+        <channel id="8" name="HEATER2" data_type="bool"></channel>
+    </telemetry>
+    <events>
+        <event id="0" name="PWR_OUTPUT_SET" severity="ACTIVITY_HI" format_string="PWR Output %d set to %d"  >
+            <args>
+		        <arg name="toggleTargetEV" type="ENUM">
+		            <enum name="devicesEV">
+			            <item name="OUT1_EV"/>
+                        <item name="OUT2_EV"/>
+                        <item name="OUT3_EV"/>
+                        <item name="OUT4_EV"/>
+                        <item name="OUT5_EV"/>
+                        <item name="OUT6_EV"/>
+			            <item name="PV4_EV"/>
+                        <item name="HEAT1_EV"/>
+                        <item name="HEAT2_EV"/>
+		            </enum>
+		        </arg>
+                <arg name="enabled_EV" type="bool"></arg>                                 
+            </args>
+        </event>
+    </events>
+</component>
+

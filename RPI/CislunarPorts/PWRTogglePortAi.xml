@@ -1,0 +1,18 @@
+<interface name="PWRTogglePort" namespace="Rpi">
+	<args>
+	    <arg name="toggleTarget" type="ENUM">
+	        <enum name="devices">
+		        <item name="PWR_OUT1"/>
+		        <item name="PWR_OUT2"/>
+		        <item name="PWR_OUT3"/>
+				<item name="PWR_OUT4"/>
+				<item name="PWR_OUT5"/>
+				<item name="PWR_OUT6"/>
+				<item name="PWR_PV4"/>
+				<item name="PWR_HEAT1"/>
+				<item name="PWR_HEAT2"/>  
+	        </enum>
+	    </arg>
+		<arg name="action" type="bool"></arg>
+    </args>
+</interface>
