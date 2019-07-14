@@ -39,6 +39,7 @@ void constructApp(int port_number, char* hostname);
 #include <RPI/RTC/RTCComponentImpl.hpp>
 #include <RPI/IMU/IMUComponentImpl.hpp>
 #include <RPI/ADC/ADCComponentImpl.hpp>
+#include <RPI/PWR/PWRComponentImpl.hpp>
 
 extern Svc::RateGroupDriverImpl rateGroupDriverComp;
 extern Svc::ActiveRateGroupImpl rateGroup10HzComp;
@@ -73,6 +74,7 @@ extern Rpi::AggregatorComponentImpl aggregator;
 extern Rpi::RTCComponentImpl rtc;
 extern Rpi::IMUComponentImpl imu;
 extern Rpi::ADCComponentImpl adc;
+extern Rpi::PWRComponentImpl pwr;
 
 
 #endif

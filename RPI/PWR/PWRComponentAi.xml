@@ -3,7 +3,7 @@
     <import_port_type>RPI/CislunarPorts/PWRPingPortAi.xml</import_port_type>
     <ports>
 	    <port name="OutputTogglePort" data_type="Rpi::PWRTogglePort" kind="sync_input"></port>
-        <port name="WtchdogPort" data_type="Rpi::PWRPingPort" kind="sync_input"></port>
+        <port name="WatchdogPort" data_type="Rpi::PWRPingPort" kind="sync_input"></port>
     </ports>
     <commands>
         <command kind="sync" opcode="0" mnemonic="PWR_SET_OUTPUT">

@@ -61,9 +61,9 @@ namespace Rpi {
           bool action 
       );
 
-      //! Handler implementation for WtchdogPort
+      //! Handler implementation for WatchdogPort
       //!
-      void WtchdogPort_handler(
+      void WatchdogPort_handler(
           const NATIVE_INT_TYPE portNum, /*!< The port number*/
           U32 timerNum 
       );

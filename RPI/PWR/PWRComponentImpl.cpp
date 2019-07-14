@@ -113,7 +113,7 @@ namespace Rpi {
   }
 
   void PWRComponentImpl ::
-    WtchdogPort_handler(
+    WatchdogPort_handler(
         const NATIVE_INT_TYPE portNum,
         U32 timerNum
     )

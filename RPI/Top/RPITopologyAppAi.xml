@@ -33,6 +33,7 @@
    <import_component_type>RPI/RTC/RTCComponentAi.xml</import_component_type>
    <import_component_type>RPI/IMU/IMUComponentAi.xml</import_component_type>
    <import_component_type>RPI/ADC/ADCComponentAi.xml</import_component_type>
+   <import_component_type>RPI/PWR/PWRComponentAi.xml</import_component_type>
 
    <!-- Declare component instances - must match names in Components.hpp -->
 
@@ -88,6 +89,7 @@
    <instance namespace="Rpi" name="rtc" type="RTC" base_id="2900" base_id_window="100"/>
    <instance namespace="Rpi" name="imu" type="IMU" base_id="3000" base_id_window="100"/>
    <instance namespace="Rpi" name="adc" type="ADC" base_id="3100" base_id_window="100"/>
+   <instance namespace="Rpi" name="pwr" type="PWR" base_id="3200" base_id_window="100"/>
 
 
    <!-- Command Registration/Dispatch/Reply Connections -->
@@ -138,6 +140,10 @@
 	 <source component = "adc" port = "CmdReg" type = "CmdReg" num = "0"/>
  	 <target component = "cmdDisp" port = "compCmdReg" type = "CmdReg" num = "10"/>
 </connection>
+<connection name = "PWRReg">
+	 <source component = "pwr" port = "CmdReg" type = "CmdReg" num = "0"/>
+ 	 <target component = "cmdDisp" port = "compCmdReg" type = "CmdReg" num = "11"/>
+</connection>
 
     <!-- Command Dispatch Ports - Dispatch port number must match registration port for each component -->
 
@@ -185,6 +191,10 @@
 	 <source component = "cmdDisp" port = "compCmdSend" type = "Cmd" num = "10"/>
  	 <target component = "adc" port = "CmdDisp" type = "Cmd" num = "0"/>
 </connection>
+<connection name = "PWRDisp">
+	 <source component = "cmdDisp" port = "compCmdSend" type = "Cmd" num = "11"/>
+ 	 <target component = "pwr" port = "CmdDisp" type = "Cmd" num = "0"/>
+</connection>
     <!-- Command Reply Ports - Go to the same response port on the dispatcher -->
 
    <connection name = "EventLoggerReply">
@@ -229,6 +239,10 @@
 </connection>
 <connection name = "ADCReply">
 	 <source component = "adc" port = "CmdStatus" type = "CmdResponse" num = "0"/>
+ 	 <target component = "cmdDisp" port = "compCmdStat" type = "CmdResponse" num = "0"/>
+</connection>
+<connection name = "PWRReply">
+	 <source component = "pwr" port = "CmdStatus" type = "CmdResponse" num = "0"/>
  	 <target component = "cmdDisp" port = "compCmdStat" type = "CmdResponse" num = "0"/>
 </connection>
 
@@ -346,6 +360,10 @@
 	 <source component = "adc" port = "Log" type = "Log" num = "0"/>
  	 <target component = "eventLogger" port = "LogRecv" type = "Log" num = "0"/>
 </connection>
+<connection name = "PWRLog">
+	 <source component = "pwr" port = "Log" type = "Log" num = "0"/>
+ 	 <target component = "eventLogger" port = "LogRecv" type = "Log" num = "0"/>
+</connection>
    
    <!-- Event Logger Text Connections -->
    
@@ -433,6 +451,10 @@
 	 <source component = "adc" port = "LogText" type = "LogText" num = "0"/>
  	 <target component = "textLogger" port = "TextLogger" type = "LogText" num = "0"/>
 </connection>
+<connection name = "PWRTextLog">
+	 <source component = "pwr" port = "LogText" type = "LogText" num = "0"/>
+ 	 <target component = "textLogger" port = "TextLogger" type = "LogText" num = "0"/>
+</connection>
 
    <!-- Telemetry Connections -->
 
@@ -494,6 +516,10 @@
 </connection>
 <connection name = "ADCTextTlm">
 	 <source component = "adc" port = "Tlm" type = "Tlm" num = "0"/>
+ 	 <target component = "chanTlm" port = "TlmRecv" type = "Tlm" num = "0"/>
+</connection>
+<connection name = "PWRTextTlm">
+	 <source component = "pwr" port = "Tlm" type = "Tlm" num = "0"/>
  	 <target component = "chanTlm" port = "TlmRecv" type = "Tlm" num = "0"/>
 </connection>
 
@@ -815,36 +841,45 @@
    </connection>
 <!-- RTC Connection -->
 <connection name = "RTCWriteConnection">
-	 <source component = "aggregator" port = "RTCWrite" type = "Ref::RTCWritePort" num = "0"/>
- 	 <target component = "rtc" port = "WritePort" type = "Ref::RTCWritePort" num = "0"/>
+	 <source component = "aggregator" port = "RTCWrite" type = "Rpi::RTCWritePort" num = "0"/>
+ 	 <target component = "rtc" port = "WritePort" type = "Rpi::RTCWritePort" num = "0"/>
 </connection>
 <connection name = "RTCReadConnection">
-	 <source component = "aggregator" port = "RTCRead" type = "Ref::RTCReadPort" num = "0"/>
- 	 <target component = "rtc" port = "ReadPort" type = "Ref::RTCReadPort" num = "0"/>
+	 <source component = "aggregator" port = "RTCRead" type = "Rpi::RTCReadPort" num = "0"/>
+ 	 <target component = "rtc" port = "ReadPort" type = "Rpi::RTCReadPort" num = "0"/>
 </connection>
 
 <!-- IMU Connection -->
 
 <connection name = "IMUConfigConnection">
-	 <source component = "aggregator" port = "IMUConfig" type = "Ref::IMUConfigPort" num = "0"/>
- 	 <target component = "imu" port = "ConfigPort" type = "Ref::IMUConfigPort" num = "0"/>
+	 <source component = "aggregator" port = "IMUConfig" type = "Rpi::IMUConfigPort" num = "0"/>
+ 	 <target component = "imu" port = "ConfigPort" type = "Rpi::IMUConfigPort" num = "0"/>
 </connection>
 <connection name = "IMUReadConnection">
-	 <source component = "aggregator" port = "IMURead" type = "Ref::IMUReadPort" num = "0"/>
- 	 <target component = "imu" port = "ReadPort" type = "Ref::IMUReadPort" num = "0"/>
+	 <source component = "aggregator" port = "IMURead" type = "Rpi::IMUReadPort" num = "0"/>
+ 	 <target component = "imu" port = "ReadPort" type = "Rpi::IMUReadPort" num = "0"/>
 </connection>
 <!-- ADC Connections -->
 <connection name = "ADCPressureConnection">
-	 <source component = "aggregator" port = "ADCPressure" type = "Ref::ADCPressurePort" num = "0"/>
- 	 <target component = "adc" port = "PressurePort" type = "Ref::ADCPressurePort" num = "0"/>
+	 <source component = "aggregator" port = "ADCPressure" type = "Rpi::ADCPressurePort" num = "0"/>
+ 	 <target component = "adc" port = "PressurePort" type = "Rpi::ADCPressurePort" num = "0"/>
 </connection>
 <connection name = "ADCTemperatureConnection">
-	 <source component = "aggregator" port = "ADCTemp" type = "Ref::ADCTempPort" num = "0"/>
- 	 <target component = "adc" port = "TemperaturePort" type = "Ref::ADCTempPort" num = "0"/>
+	 <source component = "aggregator" port = "ADCTemp" type = "Rpi::ADCTempPort" num = "0"/>
+ 	 <target component = "adc" port = "TemperaturePort" type = "Rpi::ADCTempPort" num = "0"/>
 </connection>
 <connection name = "ADCConfigConnection">
-	 <source component = "aggregator" port = "ADCConfig" type = "Ref::ADCConfigPort" num = "0"/>
- 	 <target component = "adc" port = "ConfigPort" type = "Ref::ADCConfigPort" num = "0"/>
+	 <source component = "aggregator" port = "ADCConfig" type = "Rpi::ADCConfigPort" num = "0"/>
+ 	 <target component = "adc" port = "ConfigPort" type = "Rpi::ADCConfigPort" num = "0"/>
+</connection>
+<!-- PWR Connections -->
+<connection name = "PWRToggleConnection">
+	 <source component = "aggregator" port = "PWRToggle" type = "Rpi::PWRTogglePort" num = "0"/>
+ 	 <target component = "pwr" port = "OutputTogglePort" type = "Rpi::PWRTogglePort" num = "0"/>
+</connection>
+<connection name = "PWRPingConnection">
+	 <source component = "aggregator" port = "PWRPing" type = "Rpi::PWRPingPort" num = "0"/>
+ 	 <target component = "pwr" port = "WatchdogPort" type = "Rpi::PWRPingPort" num = "0"/>
 </connection>
 
 </assembly>

@@ -105,6 +105,12 @@ Rpi::ADCComponentImpl adc
 #endif
 ;
 
+Rpi::PWRComponentImpl pwr
+#if FW_OBJECT_NAMES == 1
+("pwr")
+#endif
+;
+
 void constructApp(int port_number, char* hostname) {
 
     // Initialize rate group driver
@@ -159,6 +165,7 @@ void constructApp(int port_number, char* hostname) {
     rtc.init(0);
     imu.init(0);
     adc.init(0);
+    pwr.init(0);
     constructRPIArchitecture();
 
     /* Register commands */
@@ -173,6 +180,7 @@ void constructApp(int port_number, char* hostname) {
     rtc.regCommands();
     imu.regCommands();
     adc.regCommands();
+    pwr.regCommands();
 
     // read parameters
     prmDb.readParamFile();
