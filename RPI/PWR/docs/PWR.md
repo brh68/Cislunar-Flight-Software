@@ -31,3 +31,5 @@
 |PWR_OUTPUT_SET|0 (0x0)|| | | | |
 | | | |toggleTargetEV|devicesEV|||
 | | | |enabled_EV|bool|||
+|PWR_WATCHDOG_PING|1 (0x1)|| | | | |
+| | | |timerNum|U32|||

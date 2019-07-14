@@ -175,6 +175,83 @@ namespace Rpi {
     this->cmdResponse_out(opCode,cmdSeq,Fw::COMMAND_OK);
   }
 
+  void AggregatorComponentImpl ::
+    AGG_SET_PWR_TOGGLE_cmdHandler(
+        const FwOpcodeType opCode,
+        const U32 cmdSeq,
+        outOptions out,
+        bool status
+    )
+  {
+    devices dev;
+    PWREventEnum event;
+    switch(out){
+      case COMMS:
+        dev=PWR_OUT1;
+        event = PWR_OUTPUT;
+        this->tlmWrite_AGG_PWR_COMMS(status);
+        break;
+      case ANT_BURN:
+        dev=PWR_OUT2;
+        event = PWR_OUTPUT;
+        this->tlmWrite_AGG_PWR_ANTENNA_BURN(status);
+        break;
+      case GLOWPLUG:
+        dev=PWR_OUT3;
+        event = PWR_OUTPUT;
+        this->tlmWrite_AGG_PWR_GLOWPLUG(status);
+        break;
+      case SEP_BURN:
+        dev=PWR_OUT4;
+        event = PWR_OUTPUT;
+        this->tlmWrite_AGG_PWR_SEPARATION_BURN(status);
+        break;
+      case SOLENOID:
+        dev=PWR_OUT5;
+        event = PWR_OUTPUT;
+        this->tlmWrite_AGG_PWR_SOLENOID(status);
+        break;
+      case ELECTROLYZER:
+        dev=PWR_OUT6;
+        event = PWR_OUTPUT;
+        this->tlmWrite_AGG_PWR_ELECTROLYZER(status);
+        break;
+      case PV4:
+        dev=PWR_PV4;
+        event = PWR_PV4SET;
+        this->tlmWrite_AGG_PWR_PV4(status);
+        break;
+      case HEATER1:
+        dev=PWR_HEAT1;
+        event = PWR_HEATER;
+        this->tlmWrite_AGG_PWR_HEAT1(status);
+        break;
+      case HEATER2:
+        dev=PWR_HEAT2;
+        event = PWR_HEATER;
+        this->tlmWrite_AGG_PWR_HEAT2(status);
+        break;
+      default:
+        FW_ASSERT(out, 0);
+        break;
+    }
+    this->PWRToggle_out(0, dev, status);
+    this->log_ACTIVITY_HI_PWR_COMMAND_SENT(event);
+    this->cmdResponse_out(opCode,cmdSeq,Fw::COMMAND_OK);
+  }
+
+  void AggregatorComponentImpl ::
+    AGG_SEND_PWR_PING_cmdHandler(
+        const FwOpcodeType opCode,
+        const U32 cmdSeq,
+        U32 timerNum
+    )
+  {
+    this->PWRPing_out(0, timerNum);
+    this->log_ACTIVITY_HI_PWR_COMMAND_SENT(PWR_WATCHDOG_CONFIG);
+    this->cmdResponse_out(opCode,cmdSeq,Fw::COMMAND_OK);
+  }
+
 
 
 

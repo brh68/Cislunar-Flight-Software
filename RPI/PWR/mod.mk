@@ -1,1 +1,3 @@
-SRC =  PWRComponentAi.xml
+SRC =  PWRComponentAi.xml PWRComponentImpl.cpp
+
+HDR = PWRComponentImpl.hpp

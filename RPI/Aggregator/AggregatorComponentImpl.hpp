@@ -110,6 +110,23 @@ namespace Rpi {
           const U32 cmdSeq /*!< The command sequence number*/
       );
 
+      //! Implementation for AGG_SET_PWR_TOGGLE command handler
+      //! 
+      void AGG_SET_PWR_TOGGLE_cmdHandler(
+          const FwOpcodeType opCode, /*!< The opcode*/
+          const U32 cmdSeq, /*!< The command sequence number*/
+          outOptions out, 
+          bool status 
+      );
+
+      //! Implementation for AGG_SEND_PWR_PING command handler
+      //! 
+      void AGG_SEND_PWR_PING_cmdHandler(
+          const FwOpcodeType opCode, /*!< The opcode*/
+          const U32 cmdSeq, /*!< The command sequence number*/
+          U32 timerNum 
+      );
+
 
     };
 

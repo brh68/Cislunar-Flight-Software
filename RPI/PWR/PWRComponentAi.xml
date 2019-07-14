@@ -1,7 +1,9 @@
 <component name="PWR" kind="passive" namespace="Rpi">
     <import_port_type>RPI/CislunarPorts/PWRTogglePortAi.xml</import_port_type>
+    <import_port_type>RPI/CislunarPorts/PWRPingPortAi.xml</import_port_type>
     <ports>
 	    <port name="OutputTogglePort" data_type="Rpi::PWRTogglePort" kind="sync_input"></port>
+        <port name="WtchdogPort" data_type="Rpi::PWRPingPort" kind="sync_input"></port>
     </ports>
     <commands>
         <command kind="sync" opcode="0" mnemonic="PWR_SET_OUTPUT">
@@ -51,6 +53,11 @@
 		            </enum>
 		        </arg>
                 <arg name="enabled_EV" type="bool"></arg>                                 
+            </args>
+        </event>
+        <event id="1" name="PWR_WATCHDOG_PING" severity="ACTIVITY_LO" format_string="PWR sent watchdog ping to timer %d">
+            <args>
+                <arg name="timerNum" type="U32"></arg>
             </args>
         </event>
     </events>

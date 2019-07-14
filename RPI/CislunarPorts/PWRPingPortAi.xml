@@ -1,0 +1,5 @@
+<interface name="PWRPingPort" namespace="Rpi">
+	<args>
+	    <arg name="timerNum" type="U32"></arg>
+    </args>
+</interface>

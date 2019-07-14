@@ -9,9 +9,13 @@
     <import_port_type>RPI/CislunarPorts/ADCTempPortAi.xml</import_port_type>
     <import_port_type>RPI/CislunarPorts/ADCPressurePortAi.xml</import_port_type>
     <import_port_type>RPI/CislunarPorts/ADCConfigPortAi.xml</import_port_type>
+<!-- PWR Port Imports -->
+    <import_port_type>RPI/CislunarPorts/PWRTogglePortAi.xml</import_port_type>
+    <import_port_type>RPI/CislunarPorts/PWRPingPortAi.xml</import_port_type>
+
     <ports>
 <!-- RTC Port Creation -->
-        <port name="RTCWrite" data_type="Rpi::RTCWritePort" kind="output"></port>
+    <port name="RTCWrite" data_type="Rpi::RTCWritePort" kind="output"></port>
 	<port name="RTCRead" data_type="Rpi::RTCReadPort" kind="output"></port>
 <!-- IMU Port Creation -->
 	<port name="IMUConfig" data_type="Rpi::IMUConfigPort" kind="output"></port>
@@ -20,6 +24,9 @@
 	<port name="ADCPressure" data_type="Rpi::ADCPressurePort" kind="output"></port>
 	<port name="ADCTemp" data_type="Rpi::ADCTempPort" kind="output"></port>
 	<port name="ADCConfig" data_type="Rpi::ADCConfigPort" kind="output"></port>
+<!-- PWR Port Creation -->
+	<port name="PWRToggle" data_type="Rpi::PWRTogglePort" kind="output"></port>
+	<port name="PWRPing" data_type="Rpi::PWRPingPort" kind="output"></port>
     </ports>
     <commands>
 <!-- RTC Commands -->
@@ -28,67 +35,102 @@
             	get time
             	</comment>
         </command>
-	<command kind="async" opcode="1" mnemonic="SET_RTC_DATA">
-		<comment> 
-		set time
-		</comment>
-		<args>
-			<arg name="time" type="U32"></arg>
-		</args>
-	</command>
+		<command kind="async" opcode="1" mnemonic="SET_RTC_DATA">
+			<comment> 
+			set time
+			</comment>
+			<args>
+				<arg name="time" type="U32"></arg>
+			</args>
+		</command>
 <!-- IMU Commands -->
-	<command kind="async" opcode="2" mnemonic="AGG_CONFIG_IMU">
-		<args>
-			<arg name="GyroConfig" type="I32"></arg>
-			<arg name="AccConfig" type="I32"></arg>
-		</args>
-	</command>
-	<command kind="async" opcode="3" mnemonic="AGG_GET_IMU_DATA">
-	    <args>
-		<arg name="Sensor" type="ENUM">
-		    <enum name="SensorType">
-			<item name="GYRO"/>
-		    	<item name="ACC"/>
-			<item name="MAG"/>
-		    </enum>
-		</arg>
-	    </args>
-	</command>
+		<command kind="async" opcode="2" mnemonic="AGG_CONFIG_IMU">
+			<args>
+				<arg name="GyroConfig" type="I32"></arg>
+				<arg name="AccConfig" type="I32"></arg>
+			</args>
+		</command>
+		<command kind="async" opcode="3" mnemonic="AGG_GET_IMU_DATA">
+			<args>
+				<arg name="Sensor" type="ENUM">
+					<enum name="SensorType">
+						<item name="GYRO"/>
+						<item name="ACC"/>
+						<item name="MAG"/>
+					</enum>
+				</arg>
+			</args>
+		</command>
 <!-- ADC Commands -->
-	<command kind="async" opcode="4" mnemonic="AGG_CONFIG_ADC">
-		<args>
-			<arg name="VoltageGain" type="F64"></arg>
-			<arg name="SampleRate" type="I32"></arg>
-		</args>
-	</command>
-	<command kind="async" opcode="5" mnemonic="AGG_GET_ADC_TEMP">
-		<args>
-			<arg name="AmbientTemp" type="F64"></arg>
-		</args>
-	</command>
-	<command kind="async" opcode="6" mnemonic="AGG_GET_ADC_PRESSURE">
-	</command>
+		<command kind="async" opcode="4" mnemonic="AGG_CONFIG_ADC">
+			<args>
+				<arg name="VoltageGain" type="F64"></arg>
+				<arg name="SampleRate" type="I32"></arg>
+			</args>
+		</command>
+		<command kind="async" opcode="5" mnemonic="AGG_GET_ADC_TEMP">
+			<args>
+				<arg name="AmbientTemp" type="F64"></arg>
+			</args>
+		</command>
+		<command kind="async" opcode="6" mnemonic="AGG_GET_ADC_PRESSURE">
+		</command>
+<!-- PWR Commands -->
+		<command kind="async" opcode="7" mnemonic="AGG_SET_PWR_TOGGLE">
+			<args>
+				<arg name="out" type="ENUM">
+					<enum name="outOptions">
+						<item name="COMMS"/>
+						<item name="ANT_BURN"/>
+						<item name="GLOWPLUG"/>
+						<item name="SEP_BURN"/>
+						<item name="SOLENOID"/>
+						<item name="ELECTROLYZER"/>
+						<item name="PV4"/>
+						<item name="HEATER1"/>
+						<item name="HEATER2"/>
+					</enum>
+				</arg>
+				<arg name="status" type="bool"></arg>
+			</args>
+		</command>
+		<command kind="async" opcode="8" mnemonic="AGG_SEND_PWR_PING">
+			<args>
+				<arg name="timerNum" type="U32"></arg>
+			</args>
+		</command>
+
     </commands>
     <telemetry>
 <!-- RTC Telemetry -->
-        <channel id="0" name="AGG_TIME" data_type="U32"></channel>
+    	<channel id="0" name="AGG_TIME" data_type="U32"></channel>
 <!-- IMU Telemetry -->
-	<channel id="1" name="AGG_GyroX" data_type = "F64"></channel>
-	<channel id="2" name="AGG_GyroY" data_type = "F64"></channel>
-	<channel id="3" name="AGG_GyroZ" data_type = "F64"></channel>
-	<channel id="4" name="AGG_AccX" data_type = "F64"></channel>
-	<channel id="5" name="AGG_AccY" data_type = "F64"></channel>
-	<channel id="6" name="AGG_AccZ" data_type = "F64"></channel>
-	<channel id="7" name="AGG_MagX" data_type = "F64"></channel>
-	<channel id="8" name="AGG_MagY" data_type = "F64"></channel>
-	<channel id="9" name="AGG_MagZ" data_type = "F64"></channel>
-	<channel id="10" name="AGG_IMU_GyroConfig" data_type="I32"></channel>
-	<channel id="11" name="AGG_IMU_AccConfig" data_type="I32"></channel>
+		<channel id="1" name="AGG_GyroX" data_type = "F64"></channel>
+		<channel id="2" name="AGG_GyroY" data_type = "F64"></channel>
+		<channel id="3" name="AGG_GyroZ" data_type = "F64"></channel>
+		<channel id="4" name="AGG_AccX" data_type = "F64"></channel>
+		<channel id="5" name="AGG_AccY" data_type = "F64"></channel>
+		<channel id="6" name="AGG_AccZ" data_type = "F64"></channel>
+		<channel id="7" name="AGG_MagX" data_type = "F64"></channel>
+		<channel id="8" name="AGG_MagY" data_type = "F64"></channel>
+		<channel id="9" name="AGG_MagZ" data_type = "F64"></channel>
+		<channel id="10" name="AGG_IMU_GyroConfig" data_type="I32"></channel>
+		<channel id="11" name="AGG_IMU_AccConfig" data_type="I32"></channel>
 <!--ADC Telemetry -->
-	<channel id="12" name="AGG_ADC_VGAIN" data_type="F64"></channel>
-	<channel id="13" name="AGG_ADC_SAMPLE_RATE" data_type="I32"></channel>
-	<channel id="14" name="AGG_ADC_TEMP" data_type="F64"></channel>
-	<channel id="15" name="AGG_ADC_PRESSURE" data_type="F64"></channel>
+		<channel id="12" name="AGG_ADC_VGAIN" data_type="F64"></channel>
+		<channel id="13" name="AGG_ADC_SAMPLE_RATE" data_type="I32"></channel>
+		<channel id="14" name="AGG_ADC_TEMP" data_type="F64"></channel>
+		<channel id="15" name="AGG_ADC_PRESSURE" data_type="F64"></channel>
+<!--PWR Telemetry -->
+		<channel id="16" name="AGG_PWR_COMMS" data_type="bool"></channel>
+		<channel id="17" name="AGG_PWR_ANTENNA_BURN" data_type="bool"></channel>
+		<channel id="18" name="AGG_PWR_GLOWPLUG" data_type="bool"></channel>
+		<channel id="19" name="AGG_PWR_SEPARATION_BURN" data_type="bool"></channel>
+		<channel id="20" name="AGG_PWR_SOLENOID" data_type="bool"></channel>
+		<channel id="21" name="AGG_PWR_ELECTROLYZER" data_type="bool"></channel>
+		<channel id="22" name="AGG_PWR_PV4" data_type="bool"></channel>
+		<channel id="23" name="AGG_PWR_HEAT1" data_type="bool"></channel>
+		<channel id="24" name="AGG_PWR_HEAT2" data_type="bool"></channel>
     </telemetry>
     <events>
 <!-- RTC Events -->
@@ -130,6 +172,22 @@
                 </arg>          
             </args>
         </event>
+<!-- PWR Events -->
+        <event id="3" name="PWR_COMMAND_SENT" severity="ACTIVITY_HI" format_string="PWR CMD SENT: %d"  >
+            <args>             
+                <arg name="opEv" type="ENUM">
+	            	<enum name="PWREventEnum">
+	                	<item name="PWR_CONFIG"/>
+	                	<item name="PWR_WATCHDOG_CONFIG"/>    
+	                	<item name="PWR_WATCHDOG_PING"/>
+	                	<item name="PWR_OUTPUT"/>
+						<item name="PWR_PV4SET"/>
+						<item name="PWR_HEATER"/>   						        
+	            	</enum>
+                </arg>          
+            </args>
+        </event>
     </events>
+
 </component>
 
