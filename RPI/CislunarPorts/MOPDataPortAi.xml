@@ -1,0 +1,16 @@
+<interface name="MOPDataPort" namespace="Rpi">
+    <args>
+	    <arg name="MOPtarget" type="ENUM">
+	        <enum name="MOPdata">
+		        <item name="IMU_GYRO"/>
+		        <item name="IMU_ACC"/>
+		        <item name="IMU_MAG"/>
+                <item name="ADC_PRESS"/>
+                <item name="ADC_TEMP"/>
+                <item name="RTC_TIME"/>
+                <item name="OPNAV_ANG_POS"/>
+	        </enum>
+	    </arg>
+    </args>
+    <return type="F64" pass_by="pointer"/>
+</interface>

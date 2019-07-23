@@ -1,0 +1,21 @@
+<interface name="MOPOrdersPort" namespace="Rpi">
+    <args>
+	    <arg name="devices" type="ENUM">
+	        <enum name="deviceList">
+		        <item name="COMMS"/>
+		        <item name="ANTENNA_BURN"/>
+		        <item name="GLOWPLUG"/>
+                <item name="SEP_BURN"/>
+                <item name="SOLENOID"/>
+                <item name="ELECTROLYZER"/>
+                <item name="PV4"/>
+                <item name="HEATER1"/>
+                <item name="HEATER2"/>
+                <item name="WATCHDOG_PING"/>
+                <item name="HEALTH_DOWNLINK"/>
+                <item name="UPDATE_TIME"/>
+	        </enum>
+	    </arg>
+        <arg name="order" type="bool"></arg>
+    </args>
+</interface>
