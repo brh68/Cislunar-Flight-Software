@@ -1,0 +1,4 @@
+<interface name="RTCReadPort" namespace="Rpi">
+	<return type="U32" pass_by="value"/>
+</interface>
+

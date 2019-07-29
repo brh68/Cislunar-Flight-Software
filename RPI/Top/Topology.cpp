@@ -81,6 +81,36 @@ Drv::LinuxGpioDriverComponentImpl gpio17Drv("gpio17Drv");
 
 Rpi::RpiDemoComponentImpl rpiDemo("rpiDemo");
 
+Rpi::AggregatorComponentImpl aggregator
+#if FW_OBJECT_NAMES == 1
+("aggregator")
+#endif
+;
+
+Rpi::RTCComponentImpl rtc
+#if FW_OBJECT_NAMES == 1
+("rtc")
+#endif
+;
+
+Rpi::IMUComponentImpl imu
+#if FW_OBJECT_NAMES == 1
+("imu")
+#endif
+;
+
+Rpi::ADCComponentImpl adc
+#if FW_OBJECT_NAMES == 1
+("adc")
+#endif
+;
+
+Rpi::PWRComponentImpl pwr
+#if FW_OBJECT_NAMES == 1
+("pwr")
+#endif
+;
+
 void constructApp(int port_number, char* hostname) {
 
     // Initialize rate group driver
@@ -131,7 +161,11 @@ void constructApp(int port_number, char* hostname) {
     gpio17Drv.init(0);
 
     rpiDemo.init(10,0);
-
+    aggregator.init(10,0);
+    rtc.init(0);
+    imu.init(0);
+    adc.init(0);
+    pwr.init(0);
     constructRPIArchitecture();
 
     /* Register commands */
@@ -142,6 +176,11 @@ void constructApp(int port_number, char* hostname) {
     fileDownlink.regCommands();
     health.regCommands();
     rpiDemo.regCommands();
+    aggregator.regCommands();
+    rtc.regCommands();
+    imu.regCommands();
+    adc.regCommands();
+    pwr.regCommands();
 
     // set sequencer timeout
     cmdSeq.setTimeout(30);
@@ -172,6 +211,7 @@ void constructApp(int port_number, char* hostname) {
     rpiDemo.loadParameters();
 
     // Active component startup
+    aggregator.start(0, 100, 10*1024);
     // start rate groups
     rateGroup10HzComp.start(0, 120,10 * 1024);
     rateGroup1HzComp.start(0, 119,10 * 1024);
@@ -243,5 +283,6 @@ void exitTasks(void) {
     fileDownlink.exit();
     cmdSeq.exit();
     rpiDemo.exit();
+    aggregator.exit();
 }
 

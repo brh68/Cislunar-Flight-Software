@@ -176,7 +176,13 @@ ACDEVTEST_MODULES := \
 	
 RPI_APP_MODULES := \
 	RPI/Top \
-	RPI/RpiDemo
+	RPI/RpiDemo \
+	RPI/CislunarPorts \
+	RPI/ADC \
+	RPI/Aggregator \
+	RPI/IMU \
+	RPI/PWR \
+	RPI/RTC
 	
 RPI_MODULES := \
 	\

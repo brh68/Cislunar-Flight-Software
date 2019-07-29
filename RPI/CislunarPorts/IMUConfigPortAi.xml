@@ -1,0 +1,7 @@
+<interface name="IMUConfigPort" namespace="Rpi">
+	<args>
+		<arg name="GyroConfig" type="I32"></arg>
+		<arg name="AccConfig" type="I32"></arg>
+	</args>
+</interface>
+

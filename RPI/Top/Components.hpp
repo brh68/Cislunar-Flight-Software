@@ -35,6 +35,11 @@ void constructApp(int port_number, char* hostname);
 
 // Main app
 #include <RPI/RpiDemo/RpiDemoComponentImpl.hpp>
+#include <RPI/Aggregator/AggregatorComponentImpl.hpp>
+#include <RPI/RTC/RTCComponentImpl.hpp>
+#include <RPI/IMU/IMUComponentImpl.hpp>
+#include <RPI/ADC/ADCComponentImpl.hpp>
+#include <RPI/PWR/PWRComponentImpl.hpp>
 
 extern Svc::RateGroupDriverImpl rateGroupDriverComp;
 extern Svc::ActiveRateGroupImpl rateGroup10HzComp;
@@ -65,6 +70,11 @@ extern Drv::LinuxGpioDriverComponentImpl gpio25Drv;
 extern Drv::LinuxGpioDriverComponentImpl gpio17Drv;
 
 extern Rpi::RpiDemoComponentImpl rpiDemo;
+extern Rpi::AggregatorComponentImpl aggregator;
+extern Rpi::RTCComponentImpl rtc;
+extern Rpi::IMUComponentImpl imu;
+extern Rpi::ADCComponentImpl adc;
+extern Rpi::PWRComponentImpl pwr;
 
 
 
