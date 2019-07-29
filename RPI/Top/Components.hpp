@@ -34,7 +34,6 @@ void constructApp(int port_number, char* hostname);
 #include <Drv/LinuxGpioDriver/LinuxGpioDriverComponentImpl.hpp>
 
 // Main app
-#include <RPI/RpiDemo/RpiDemoComponentImpl.hpp>
 #include <RPI/Aggregator/AggregatorComponentImpl.hpp>
 #include <RPI/RTC/RTCComponentImpl.hpp>
 #include <RPI/IMU/IMUComponentImpl.hpp>
@@ -69,7 +68,6 @@ extern Drv::LinuxGpioDriverComponentImpl gpio24Drv;
 extern Drv::LinuxGpioDriverComponentImpl gpio25Drv;
 extern Drv::LinuxGpioDriverComponentImpl gpio17Drv;
 
-extern Rpi::RpiDemoComponentImpl rpiDemo;
 extern Rpi::AggregatorComponentImpl aggregator;
 extern Rpi::RTCComponentImpl rtc;
 extern Rpi::IMUComponentImpl imu;

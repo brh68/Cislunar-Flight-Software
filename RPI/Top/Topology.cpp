@@ -79,7 +79,6 @@ Drv::LinuxGpioDriverComponentImpl gpio24Drv("gpio24Drv");
 Drv::LinuxGpioDriverComponentImpl gpio25Drv("gpio25Drv");
 Drv::LinuxGpioDriverComponentImpl gpio17Drv("gpio17Drv");
 
-Rpi::RpiDemoComponentImpl rpiDemo("rpiDemo");
 
 Rpi::AggregatorComponentImpl aggregator
 #if FW_OBJECT_NAMES == 1
@@ -160,7 +159,7 @@ void constructApp(int port_number, char* hostname) {
     gpio25Drv.init(0);
     gpio17Drv.init(0);
 
-    rpiDemo.init(10,0);
+    //rpiDemo.init(10,0);
     aggregator.init(10,0);
     rtc.init(0);
     imu.init(0);
@@ -175,7 +174,7 @@ void constructApp(int port_number, char* hostname) {
     prmDb.regCommands();
     fileDownlink.regCommands();
     health.regCommands();
-    rpiDemo.regCommands();
+    //rpiDemo.regCommands();
     aggregator.regCommands();
     rtc.regCommands();
     imu.regCommands();
@@ -208,7 +207,7 @@ void constructApp(int port_number, char* hostname) {
     health.setPingEntries(pingEntries,FW_NUM_ARRAY_ELEMENTS(pingEntries),0x123);
 
     // load parameters
-    rpiDemo.loadParameters();
+    //rpiDemo.loadParameters();
 
     // Active component startup
     aggregator.start(0, 100, 10*1024);
@@ -226,7 +225,7 @@ void constructApp(int port_number, char* hostname) {
 
     fileDownlink.start(0, 100, 10*1024);
     fileUplink.start(0, 100, 10*1024);
-    rpiDemo.start(0, 100, 10*1024);
+    //rpiDemo.start(0, 100, 10*1024);
 
     // Use the mini-UART for our serial connection
     // https://www.raspberrypi.org/documentation/configuration/uart.md
@@ -282,7 +281,7 @@ void exitTasks(void) {
     fileUplink.exit();
     fileDownlink.exit();
     cmdSeq.exit();
-    rpiDemo.exit();
+    //rpiDemo.exit();
     aggregator.exit();
 }
 

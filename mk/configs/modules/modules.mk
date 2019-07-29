@@ -176,7 +176,6 @@ ACDEVTEST_MODULES := \
 	
 RPI_APP_MODULES := \
 	RPI/Top \
-	RPI/RpiDemo \
 	RPI/CislunarPorts \
 	RPI/ADC \
 	RPI/Aggregator \
