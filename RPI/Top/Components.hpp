@@ -60,7 +60,7 @@ extern Svc::AssertFatalAdapterComponentImpl fatalAdapter;
 extern Svc::FatalHandlerComponentImpl fatalHandler;
 extern Svc::HealthImpl health;
 
-extern Drv::LinuxSerialDriverComponentImpl uartDrv;
+//extern Drv::LinuxSerialDriverComponentImpl uartDrv;
 extern Drv::LinuxSpiDriverComponentImpl spiDrv;
 extern Drv::LinuxGpioDriverComponentImpl ledDrv;
 extern Drv::LinuxGpioDriverComponentImpl gpio23Drv;

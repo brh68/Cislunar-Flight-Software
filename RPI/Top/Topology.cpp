@@ -69,7 +69,7 @@ Svc::AssertFatalAdapterComponentImpl fatalAdapter("fatalAdapter");
 
 Svc::FatalHandlerComponentImpl fatalHandler("fatalHandler");
 
-Drv::LinuxSerialDriverComponentImpl uartDrv("uartDrv");
+//Drv::LinuxSerialDriverComponentImpl uartDrv("uartDrv");
 
 Drv::LinuxSpiDriverComponentImpl spiDrv("spiDrv");
 
@@ -149,7 +149,7 @@ void constructApp(int port_number, char* hostname) {
     fatalHandler.init(0);
     health.init(25,0);
 
-    uartDrv.init(0);
+    //uartDrv.init(0);
 
     spiDrv.init(0);
 
@@ -230,13 +230,13 @@ void constructApp(int port_number, char* hostname) {
     // Use the mini-UART for our serial connection
     // https://www.raspberrypi.org/documentation/configuration/uart.md
 
-    if (not uartDrv.open("/dev/serial0",
+    /*if (not uartDrv.open("/dev/serial0",
             Drv::LinuxSerialDriverComponentImpl::BAUD_19200,
             Drv::LinuxSerialDriverComponentImpl::NO_FLOW,
             Drv::LinuxSerialDriverComponentImpl::PARITY_NONE,
             true)) {
         return;
-    }
+    }*/
 
     if (not spiDrv.open(0,0,Drv::SPI_FREQUENCY_1MHZ)) {
         return;
@@ -262,7 +262,7 @@ void constructApp(int port_number, char* hostname) {
         return;
     }
 
-    uartDrv.startReadThread(100,10*1024,-1);
+    //uartDrv.startReadThread(100,10*1024,-1);
 
     // Initialize socket server
     sockGndIf.startSocketTask(100, 10*1024, port_number, hostname, Svc::SocketGndIfImpl::SEND_UDP);
@@ -270,7 +270,7 @@ void constructApp(int port_number, char* hostname) {
 }
 
 void exitTasks(void) {
-    uartDrv.quitReadThread();
+    //uartDrv.quitReadThread();
     linuxTimer.quit();
     rateGroup1HzComp.exit();
     rateGroup10HzComp.exit();

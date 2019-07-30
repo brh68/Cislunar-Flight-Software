@@ -75,7 +75,7 @@
    
    <instance namespace="Svc" name="textLogger" type="PassiveTextLogger" base_id="1900"  base_id_window="20" />
    
-   <instance namespace="Drv" name="uartDrv" type="LinuxSerialDriver" base_id="2000"  base_id_window="20" />
+   <!--<instance namespace="Drv" name="uartDrv" type="LinuxSerialDriver" base_id="2000"  base_id_window="20" />-->
    
    <instance namespace="Drv" name="ledDrv" type="LinuxGpioDriver" base_id="2100"  base_id_window="100" />
    <instance namespace="Drv" name="gpio23Drv" type="LinuxGpioDriver" base_id="2200"  base_id_window="100" />
@@ -85,10 +85,11 @@
    <instance namespace="Drv" name="spiDrv" type="LinuxSpiDriver" base_id="2600"  base_id_window="100" />
 
    <!--<instance namespace="Rpi" name="rpiDemo" type="RpiDemo" base_id="2700"  base_id_window="100" />-->
-   <instance namespace="Rpi" name="rtc" type="RTC" base_id="2700" base_id_window="100"/>
-   <instance namespace="Rpi" name="imu" type="IMU" base_id="2800" base_id_window="100"/>
-   <instance namespace="Rpi" name="adc" type="ADC" base_id="2900" base_id_window="100"/>
-   <instance namespace="Rpi" name="pwr" type="PWR" base_id="3000" base_id_window="100"/>
+   <instance namespace="Rpi" name="aggregator" type="Aggregator"  base_id="2700" base_id_window="100"/>
+   <instance namespace="Rpi" name="rtc" type="RTC" base_id="2800" base_id_window="100"/>
+   <instance namespace="Rpi" name="imu" type="IMU" base_id="2900" base_id_window="100"/>
+   <instance namespace="Rpi" name="adc" type="ADC" base_id="3000" base_id_window="100"/>
+   <instance namespace="Rpi" name="pwr" type="PWR" base_id="3100" base_id_window="100"/>
 
    <!-- Command Registration/Dispatch/Reply Connections -->
    
@@ -314,11 +315,11 @@
    <!--<connection name = "RpiDemoLog">
        <source component = "rpiDemo" port = "Log" type = "Log" num = "0"/>
         <target component = "eventLogger" port = "LogRecv" type = "Log" num = "0"/>
-   </connection>-->
+   </connection>
    <connection name = "UartLog">
        <source component = "uartDrv" port = "Log" type = "Log" num = "0"/>
         <target component = "eventLogger" port = "LogRecv" type = "Log" num = "0"/>
-   </connection>
+   </connection>-->
    <connection name = "SpiLog">
        <source component = "spiDrv" port = "Log" type = "Log" num = "0"/>
         <target component = "eventLogger" port = "LogRecv" type = "Log" num = "0"/>
@@ -405,11 +406,11 @@
    <!--<connection name = "RpiDemoTextLogger">
        <source component = "rpiDemo" port = "LogText" type = "LogText" num = "0"/>
         <target component = "textLogger" port = "TextLogger" type = "LogText" num = "0"/>
-   </connection>-->
+   </connection>
    <connection name = "UartLog">
        <source component = "uartDrv" port = "LogText" type = "LogText" num = "0"/>
         <target component = "textLogger" port = "TextLogger" type = "LogText" num = "0"/>
-   </connection>
+   </connection>-->
    <connection name = "SpiLog">
        <source component = "spiDrv" port = "LogText" type = "LogText" num = "0"/>
         <target component = "textLogger" port = "TextLogger" type = "LogText" num = "0"/>
@@ -492,11 +493,11 @@
    <!--<connection name = "RpiDemoTlm">
        <source component = "rpiDemo" port = "Tlm" type = "Tlm" num = "0"/>
         <target component = "chanTlm" port = "TlmRecv" type = "Tlm" num = "0"/>
-   </connection>-->
+   </connection>
    <connection name = "UartTlm">
        <source component = "uartDrv" port = "Tlm" type = "Tlm" num = "0"/>
         <target component = "chanTlm" port = "TlmRecv" type = "Tlm" num = "0"/>
-   </connection>
+   </connection>-->
    <connection name = "SpiTlm">
        <source component = "spiDrv" port = "Tlm" type = "Tlm" num = "0"/>
         <target component = "chanTlm" port = "TlmRecv" type = "Tlm" num = "0"/>
@@ -587,10 +588,10 @@
        <source component = "rpiDemo" port = "Time" type = "Time" num = "0"/>
         <target component = "linuxTime" port = "timeGetPort" type = "Time" num = "0"/>
    </connection>-->
-   <connection name = "UartDrvTime">
+   <!--<connection name = "UartDrvTime">
        <source component = "uartDrv" port = "Time" type = "Time" num = "0"/>
         <target component = "linuxTime" port = "timeGetPort" type = "Time" num = "0"/>
-   </connection>
+   </connection>-->
    <connection name = "SpiDrvTime">
        <source component = "spiDrv" port = "Time" type = "Time" num = "0"/>
         <target component = "linuxTime" port = "timeGetPort" type = "Time" num = "0"/>
