@@ -25,7 +25,7 @@ LOAD_SIZE := $(SIZE)
 
 
 
-LINK_LIBS := -ldl -lpthread -lm -lrt -lutil
+LINK_LIBS := -ldl -lpthread -lm -lrt -lutil -lwiringPi -lcrypt
 
 OPT_SPEED := -Os
 DEBUG := -g3

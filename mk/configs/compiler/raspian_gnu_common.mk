@@ -19,13 +19,13 @@ POST_LINK_LIB := $(PI_TOOLS)/tools/arm-bcm2708/arm-linux-gnueabihf/bin/arm-linux
 
 LINK_BIN := $(CXX)
 LINK_BIN_FLAGS := -z muldefs $(LIBS) #$(BUILD_32BIT)
-
+					
 FILE_SIZE := $(LS) $(LS_SIZE)
 LOAD_SIZE := $(SIZE)
 
 
 
-LINK_LIBS := -ldl -lpthread -lm -lrt -lutil
+LINK_LIBS := -ldl -lpthread -lm -lrt -lutil -lwiringPi -lcrypt
 
 OPT_SPEED := -Os
 DEBUG := -g3
@@ -42,7 +42,7 @@ LINUX_GNU_CXXFLAGS :=	$(LINUX_FLAGS_COMMON) \
 
 COVERAGE := -fprofile-arcs -ftest-coverage
 
-LINUX_GNU_INCLUDES := $(LINUX_INCLUDES_COMMON) $(COMMON_INCLUDES)
+LINUX_GNU_INCLUDES := $(LINUX_INCLUDES_COMMON) $(COMMON_INCLUDES) -I/opt/tools/rpi/WiringPi/wiringPi -I/opt/tools/rpi/WiringPi/gpio
 
 DUMP = $(BUILD_ROOT)/mk/bin/empty.sh
 
