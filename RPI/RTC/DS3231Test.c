@@ -11,7 +11,7 @@ int test;
 
 struct tm t_result;
 
-long RTCUnixTime()
+long RTCUnixTime(int test)
 {
 	struct tm t;
 	time_t t_of_day;
@@ -26,7 +26,7 @@ long RTCUnixTime()
 	return (long)t_of_day;
 }
 
-void InputUnixTime(long Ltime)
+void InputUnixTime(int test, long Ltime)
 {
 	time_t now = Ltime;
 	struct tm ts;
@@ -58,6 +58,11 @@ void InputUnixTime(long Ltime)
 	wiringPiI2CWriteReg8(test,0x06, atoi(year)+6*(atoi(year)/10));
 	
 }
+int initWiringPiRTC(void){
+	wiringPiSetup();
+	int device = wiringPiI2CSetup(0x68);
+	return device;
+}
 
 int main (void)
 {
@@ -71,13 +76,13 @@ for(int y = 0; y<1; y++){
 	//wiringPiI2CWriteReg8(test,0x02, 0x23);
 	//wiringPiI2CWriteReg8(test,0x04, 0x31);
 	//wiringPiI2CWriteReg8(test,0x05, 0x12);	
-	for (int xeta=0; xeta<1; xeta++) {
-		long t = 1369668347;
-		InputUnixTime(t);
-		printf("Input Time: %ld\n", t);
-		printf("\n%02x:%02x:%02x\n", wiringPiI2CReadReg8(test, 0x06),wiringPiI2CReadReg8(test,0x05), wiringPiI2CReadReg8(test,0x04));
-		printf("%02x:%02x:%02x\n", wiringPiI2CReadReg8(test, 0x02),wiringPiI2CReadReg8(test, 0x01),wiringPiI2CReadReg8(test, 0x00));
-		printf("Unix Time: %ld\n", RTCUnixTime());
+	//for (int xeta=0; xeta<1; xeta++) {
+	//	long t = 1369668347;
+	//	InputUnixTime(t);
+	//	printf("Input Time: %ld\n", t);
+	//	printf("\n%02x:%02x:%02x\n", wiringPiI2CReadReg8(test, 0x06),wiringPiI2CReadReg8(test,0x05), wiringPiI2CReadReg8(test,0x04));
+	//	printf("%02x:%02x:%02x\n", wiringPiI2CReadReg8(test, 0x02),wiringPiI2CReadReg8(test, 0x01),wiringPiI2CReadReg8(test, 0x00));
+	//	printf("Unix Time: %ld\n", RTCUnixTime());
 		
 		//localtime_r(&t_of_day, &t_result);
 		//printf("Unix Time: %ld\n", (long) t_of_day);
@@ -85,7 +90,7 @@ for(int y = 0; y<1; y++){
 		//printf("%02x:%02x:%02x\n",t_result.tm_hour,t_result.tm_min,t_result.tm_sec);
 		//printf(ctime(&t_of_day));
 		usleep(1000000);
-	}
+	//}
 }
 	
 	return 0;

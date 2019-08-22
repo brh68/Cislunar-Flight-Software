@@ -15,6 +15,7 @@
 #include "Fw/Types/BasicTypes.hpp"
 #include <DS3231Test.c>
 namespace Rpi {
+	int deviceId;
 
   // ----------------------------------------------------------------------
   // Construction, initialization, and destruction
@@ -39,6 +40,8 @@ namespace Rpi {
     )
   {
     RTCComponentBase::init(instance);
+	deviceId = initWiringPiRTC();
+	
   }
 
   RTCComponentImpl ::
@@ -58,7 +61,7 @@ namespace Rpi {
     )
   {
     //driver code to actually change RTC time
-    InputUnixTime(time);
+    InputUnixTime(deviceId, time);
     this->tlmWrite_RTC_TIME(time);
     this->log_ACTIVITY_HI_RTC_PORT_CALL(time, SET_EV);
   }
@@ -69,7 +72,7 @@ namespace Rpi {
     )
   {
     //driver code to retrieve time value
-    uint32_t time = RTCUnixTime(); //should be actual value, currently random
+    uint32_t time = RTCUnixTime(deviceId); //should be actual value, currently random
     this->tlmWrite_RTC_TIME(time);
     this->log_ACTIVITY_HI_RTC_PORT_CALL(time, GET_EV);
     return time;
