@@ -13,6 +13,8 @@
 
 #include <RPI/IMU/IMUComponentImpl.hpp>
 #include "Fw/Types/BasicTypes.hpp"
+#include <gyro_valueswipi.h>
+#include <gyro_valueswipi.cpp>
 
 namespace Rpi {
 
@@ -59,6 +61,8 @@ namespace Rpi {
     )
   {
 	//inser driver code here
+	GyrScale = GyroConfig;
+	AccScale = AccConfig;
     this->tlmWrite_IMU_GyroConfig(GyroConfig);
     this->tlmWrite_IMU_AccConfig(AccConfig);
     this->log_ACTIVITY_HI_IMU_CONFIGURED(GyroConfig, AccConfig);
@@ -70,32 +74,27 @@ namespace Rpi {
         data dataType
     )
   {
-    static F64 vals[3];
+    static float * vals;
+	double ret[3];
     imuTypeEV op;
+	calculate();//update constants in case they have changed
     switch(dataType){
 	case IMU_GYRO:
-	    //put actual driver code for gyro values
-	    vals[0] = 100;
-	    vals[1] = 200;
-    	    vals[2] = 300;
+		vals = gyr_data();//get gyro data from driver
 	    this->tlmWrite_IMU_GYROX(vals[0]);
 	    this->tlmWrite_IMU_GYROY(vals[1]);
 	    this->tlmWrite_IMU_GYROZ(vals[2]);
 	    op = GYRO_EV;
 	    break;
 	case IMU_ACC:
-	    vals[0] = 400;
-	    vals[1] = 500;
-    	    vals[2] = 600;
+		vals = acc_data();//get accelerometer data from driver
 	    this->tlmWrite_IMU_ACCX(vals[0]);
 	    this->tlmWrite_IMU_ACCY(vals[1]);
 	    this->tlmWrite_IMU_ACCZ(vals[2]);
 	    op = ACC_EV;
 	    break;
 	case IMU_MAG:
-	    vals[0] = 700;
-	    vals[1] = 800;
-    	    vals[2] = 900;
+		vals = mag_data();//get magenometer data from driver
 	    this->tlmWrite_IMU_MAGX(vals[0]);
 	    this->tlmWrite_IMU_MAGY(vals[1]);
 	    this->tlmWrite_IMU_MAGZ(vals[2]);
@@ -106,7 +105,10 @@ namespace Rpi {
 	    break;
     }
     this-> log_ACTIVITY_HI_IMU_READ(op, vals[0], vals[1], vals[2]);
-    return vals;
+    ret[0] = (double) vals[0];
+    ret[1] = (double) vals[1];
+    ret[2] = (double) vals[2];
+    return ret;
   }
 
   // ----------------------------------------------------------------------
